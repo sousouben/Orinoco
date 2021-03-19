@@ -12,6 +12,4 @@ function insertProduit(responce){
     }
 }
 
-
-
 window.onload= Produit();
