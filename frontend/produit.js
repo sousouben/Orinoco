@@ -1,4 +1,6 @@
-let URLAPI = "http://localhost:3000/api/teddies";
+/*Génération de l'URL de l'API selon le choix de produit à vendre
+**********************************************/
+let URLAPI = "http://localhost:3000/api/teddies";//Au choix entre : "cameras" - "furniture" - "teddies"
 
 function Produit() {
     fetch(URLAPI).then(responce=>responce.json())
