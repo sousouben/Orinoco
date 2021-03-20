@@ -7,3 +7,27 @@ function getId(){ console.log('ok');
 
 getId();
 
+
+
+/*<article id="page_produit">
+                <section class="produit_page1">
+                    <div class="img_produit">
+                        <img src="" alt="">
+                    </div>
+                    <div class="info_produit">
+                        <p></p>
+                        <div class="nom_produit">
+                            <h3></h3>
+                        </div>
+                        <div class="prix-produit">
+                            <p></p>
+                        </div>
+                        <div class="description">
+                          <h4></h4>
+                          <p> </p>
+                           <h4></h4>
+                            
+                        </div>
+                    </div>
+                </section>
+            </article>*/
