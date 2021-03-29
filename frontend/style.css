@@ -1,5 +1,7 @@
 *{
   box-sizing: border-box;
+  margin:0;
+  padding:0;
 }
 
 html{
@@ -9,7 +11,6 @@ html{
 body{
   font-family: 'Roboto', sans-serif;
   font-weight: 500;
-  margin: 0;
   font-size: 1.6rem; 
   height: 100vh;
 }
@@ -67,7 +68,7 @@ a{
 }
 
 img, svg{
-  width: 50%;
+  width: 100%;
   border-radius: 100%;
 }
 
@@ -88,6 +89,7 @@ img, svg{
   padding: 0;
   margin: 0;
   justify-content: center;
+  text-align: center;
 
 }
 
@@ -109,7 +111,8 @@ img, svg{
 .img_produit{
   max-height: 26rem;
   max-width: 22rem;
-  margin-top: 2rem;
+  padding-top: 2rem;
+  margin: auto;
 }
 
 #banniere-image{
@@ -121,7 +124,7 @@ footer{
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color:#C37861 ;
+  background-color:#F3E9F1;
   font-size: 1rem;
   }
 
@@ -138,3 +141,30 @@ footer ul{
     padding: 0;
     font-weight: 800;
 }
+
+/* page article */
+
+.produit_page1 .img_produit{
+margin: auto;
+max: width 27rem; 
+}
+
+.produit_page1 .info_produit{
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  padding: 0 38px;
+}
+
+.produit_page1 h3{
+  padding-bottom: 1rem;
+}
+
+.produit_page1 .prix-produit{
+  padding-bottom: 1rem;
+}
+
+.produit_page1 p{
+  padding-bottom: 1rem;
+}
+
