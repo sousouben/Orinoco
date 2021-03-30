@@ -1,3 +1,5 @@
+
+
 *{
   box-sizing: border-box;
   margin:0;
@@ -15,6 +17,13 @@ body{
   height: 100vh;
 }
 
+:root{
+  --bg-color-clair:#F3E9F1 ; 
+  --hover-color:#C37861;
+  --text-btn-color:#A567BC;
+  }
+
+
 .grid-container{
 display: grid;
 grid-template-areas: 
@@ -28,7 +37,7 @@ height: 100%;
 
 header{
   grid-area: header;
-  background-color:#F3E9F1 ; 
+  background-color: var(--bg-color-clair); 
   display: flex; 
   justify-content: space-between;
   align-items: center;
@@ -36,7 +45,7 @@ header{
 }
 
 header a:hover{
-  color:#C37861;
+  color:var(--hover-color);
 }
 
 h1{
@@ -72,6 +81,19 @@ img, svg{
   border-radius: 100%;
 }
 
+.produit_item button{
+  padding: 9px 16px;
+    background-color: var(--bg-color-clair);
+    border: none;
+    border-radius: 25px;
+    color: var(--text-btn-color);
+    font-weight: bold;
+}
+
+.produit_item button:hover{
+  background-color: var(--hover-color);
+  color: black;
+}
 
 .banniere_description{
   display: flex;
@@ -124,7 +146,7 @@ footer{
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color:#F3E9F1;
+  background-color:var(--bg-color-clair);
   font-size: 1rem;
   }
 
@@ -168,3 +190,24 @@ max: width 27rem;
   padding-bottom: 1rem;
 }
 
+.produit_page1 button{
+  padding: 11px 16px;
+    background-color: var(--bg-color-clair);
+    border: none;
+    border-radius:0px 15px 15px 0px;
+    color: var(--text-btn-color);
+    font-weight: bold;
+}
+
+.produit_page1 button:hover{
+  background-color: var(--hover-color);
+  color: black;
+}
+
+select{
+  padding: 9px 16px;
+    background-color: white;
+    border: 1px solid var(--text-btn-color);
+    border-radius:15px 0px 0px 15px;
+    color: var(--text-btn-color);
+}

@@ -6,11 +6,12 @@ function getId(){ console.log('ok');
     Produit(iD);
 }
 
-let URLAPI = "http://localhost:3000/api/teddies/";//Au choix entre : "cameras" - "furniture" - "teddies"
+let URLAPI = "http://localhost:3000/api/teddies/";
 
 function Produit(iD) {
-    fetch(URLAPI+iD).then(responce=>responce.json())// fetch va chercher l'URL + transformation de la réponse en json
-    .then(responce=>insertProduit(responce))//.then sert à attacher les functions 
+    fetch(URLAPI+iD)
+    .then(responce=>responce.json())
+    .then(responce=>insertProduit(responce))
     }
 
 function insertProduit(responce){
@@ -40,15 +41,14 @@ function insertProduit(responce){
          +'</div>' 
          +'</section>' 
          +'</article>';
-         let select=document.getElementById("select");
+         let listeColor=document.getElementById("select");
             for(let i=0 ; i<responce.colors.length; i++){
-                select.innerHTML+='<option value="'+responce.colors[i]+ '">'+responce.colors[i]+'</option>'
-
+                listeColor.innerHTML+='<option value="'+responce.colors[i]+ '">'
+                +responce.colors[i]
+                +'</option>'
             }
-         
-    
 }
 
 window.onload= getId();
 
-
+   

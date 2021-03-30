@@ -3,7 +3,8 @@
 let URLAPI = "http://localhost:3000/api/teddies";//Au choix entre : "cameras" - "furniture" - "teddies"
 
 function Produit() {
-    fetch(URLAPI).then(responce=>responce.json())// fetch va chercher l'URL + transformation de la réponse en json
+    fetch(URLAPI)
+    .then(responce=>responce.json())// fetch va chercher l'URL + transformation de la réponse en json
     .then(responce=>insertProduit(responce))//.then sert à attacher les functions 
     }
 
@@ -36,5 +37,6 @@ function insertProduit(responce){
 }
 
 window.onload= Produit();
+//événement se déclenche lorsque tout le contenu de votre page est chargé
 
 
