@@ -23,7 +23,119 @@
             </nav>
         </header>
         <main>
-
+            <!--zone de panier avec image et info panier-->
+            <template id="cartTemp">
+                <div class="cart__item">
+                    <div class="item__img">
+                        <img src="" alt="">
+                    </div>
+                    <div class="item__list">
+                        <p class="item__name"></p>
+                        <p class="item__option"></p>
+                        <p class="item__price"></p>
+                        </div>
+                    <i class="fas fa-times fa-lg"></i>
+                </div>
+                <hr>
+            </template>
+            <!--fin zone de panier avec image et info panier-->
+            <!--zone validation panier ou suppression-->
+            <div class="container__cart__page">
+                <div class="cart__page">
+                    <div class="container container__cart">
+                        <span class="clearCart" id="clearCart">Vider le Panier<i
+                                class="fas fa-trash-alt fa-lg"></i></span>
+                        <div class="cart" id="cart__list"></div>
+                        <p class="total__price">PRIX TOTAL : <span id="totalPrice"></span> €</p>
+                    </div>
+                </div>
+            <!--fin zone validation panier ou suppression-->
+                <div class="payer">
+                    <div class="container container__info">
+                        <div class="container container__payer">
+                            <!--info personnelle du client-->
+                            <div class="info">
+                                <h2>Informations de livraison</h2>
+                                <div class="form__row">
+                                    <div class="form__col">
+                                        <label for="firstname">Prénom :</label>
+                                        <input type="text" id="firstname" name="user_firstname">
+                                    </div>
+                                    <div class="form__col">
+                                        <label for="name">Nom :</label>
+                                        <input type="text" id="name" name="user_name">
+                                    </div>
+                                </div>
+                                <div class="form__row">
+                                    <div class="form__col">
+                                        <label for="adress">Adresse :</label>
+                                        <input type="text" id="adress" name="user_adress">
+                                    </div>
+                                    <div class="form__col">
+                                        <label for="city">Ville :</label>
+                                        <input type="text" id="city" name="user_city">
+                                    </div>
+                                </div>
+                                <div class="form__row">
+                                    <div class="form__col">
+                                        <label for="code_postal">Code Postal :</label>
+                                        <input type="number" id="code_postal" name="user_code_postal">
+                                    </div>
+                                    <div class="form__col">
+                                        <label for="mail">e-mail :</label>
+                                        <input type="email" id="mail" name="user_mail">
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- fin info personnelle du client-->
+                            <!--mode de paiement-->
+                            <div class="mode_payment">
+                                <h2>Informations de paiement</h2>
+                                <div class="form__row">
+                                    <div class="form__col">
+                                        <label for="card_cvv">Méthode de Paiement :</label>
+                                        <div class="card__type__container">
+                                            <div>
+                                                <img id="cardType" class="card__type" src="../logo/visa_card.jpg" alt="">
+                                            </div>
+                                            <select name="select__card" id="card__option" class="card__select">
+                                                <option value="0">VISA</option>
+                                                <option value="1">CARTE BLEUE</option>
+                                                <option value="2">MASTERCARD</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form__row">
+                                    <div class="form__col">
+                                        <label for="card_number">N° de carte :</label>
+                                        <input type="number" id="card_number" name="card_number">
+                                    </div>
+                                    <div class="form__col">
+                                        <label for="card_cvv">CVV :</label>
+                                        <input type="number" id="card_cvv" name="card_cvv">
+                                    </div>
+                                </div>
+                                <div class="form__row">
+                                    <div class="form__col">
+                                        <label for="card_date">Date d'expiration :</label>
+                                        <div class="exp__container">
+                                            <input type="number" id="card_date" name="card_date">
+                                            <input type="number" id="card_year" name="card_year">
+                                        </div>
+                                    </div>
+                                    <div class="form__col">
+                                        <label for="card_name">Nom :</label>
+                                        <input type="text" id="card_name" name="card_name">
+                                    </div>
+                                </div>
+                            </div>                            
+                        </div>
+                        <button class="button">Confirmer le paiement</button>
+                           <!--fin mode de paiement-->                     
+                    </div>
+                </div>
+            </div>
         </main>
 
         <footer>
@@ -47,7 +159,7 @@
             </div>
         </footer>
     </div>
-    <sript src="../Pagesjs/panier.js" defer></sript>
+    <script src="../Pagesjs/panier.js" defer></script>
 </body>
 
 </html>
