@@ -1,10 +1,13 @@
+let idProduct;
+
 function getId(){ console.log('ok');
     const querystring = window.location.search;
     const params = new URLSearchParams(querystring);
     const iD = params.get("id");
     console.log(iD);
+    idProduct=iD;
     Produit(iD);
-}
+    }
 
 let URLAPI = "http://localhost:3000/api/teddies/";
 
@@ -36,7 +39,7 @@ function insertProduit(responce){
          +'<div>'
          +'<select id="select"></select>'
          + '<a href="#">'
-         + '<button> ajouter au panier </button>'
+         + '<button id="ajouter"> ajouter au panier </button>'
          + '</a>'
          +'</div>' 
          +'</section>' 
@@ -47,6 +50,15 @@ function insertProduit(responce){
                 +responce.colors[i]
                 +'</option>'
             }
+            document.getElementById("ajouter").addEventListener("click",function(){
+                let panier= JSON.parse(localStorage.getItem("Panier"))
+                if(panier==null){
+                    panier=[];
+                    }
+                panier.push(idProduct);
+                localStorage.setItem("Panier",JSON.stringify(panier));
+                alert("produit bien ajouté au panier");
+            });
 }
 
 window.onload= getId();
