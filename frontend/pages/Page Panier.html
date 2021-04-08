@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="description" content="Vente en ligne d'ours en peluche faits main de qualité Française." />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="../style.css">
     <script src="https://kit.fontawesome.com/56ca006626.js" crossorigin="anonymous"></script>
     <title>Votre panier - Orinoco</title>
@@ -25,34 +26,52 @@
         <main>
             <div id="Panier"></div>
             <div id="clearCart"></div>
-            <div id="info">
-                <h2>Informations de livraison</h2>
-                <div class="form__row">
-                    <div class="form__col">
-                        <label for="firstname">Prénom :</label>
-                        <input type="text" id="firstname" name="user_firstname">
-                    </div>
-                    <div class="form__col">
-                        <label for="name">Nom :</label>
-                        <input type="text" id="name" name="user_lastname">
+            
+                <div id="loginForm">
+                    <div class="row justify-content-center">
+                        <div class="col-8">
+                            <h2 class="my-5">Formulaire de livraison</h2>
+                            <form action="" method="POST">
+                                <!--nom-->
+                                <div class="form-group">
+                                    <label for="name">Nom</label>
+                                    <input type="text" class="form-control" id="name" name="user_lastname">
+                                    <small></small>
+                                </div>
+                                <!--prénom-->
+                                <div class="form-group">
+                                    <label for="firstname">Prénom</label>
+                                    <input type="text" class="form-control" id="firstname" name="user_firstname">
+                                    <small></small>
+                                </div>
+                                <!--adresse-->
+                                <div class="form-group">
+                                    <label for="adress">Adresse</label>
+                                    <input type="text" class="form-control" id="adress" name="user_adress">
+                                    <small></small>
+                                </div>
+                                <!--Ville-->
+                                <div class="form-group">
+                                    <label for="city">Ville</label>
+                                    <input type="text" class="form-control" id="city" name="user_city">
+                                    <small></small>
+                                </div>
+                                <!--email-->
+                                <div class="form-group">
+                                    <label for="email">Email</label>
+                                    <input type="text" class="form-control" name="email">
+                                    <small></small>
+                                </div>
+                                <!--inscription-->
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-secondary btn-block">validation</button>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
-                <div class="form__row">
-                    <div class="form__col">
-                        <label for="adress">Adresse :</label>
-                        <input type="text" id="adress" name="user_adress">
-                    </div>
-                    <div class="form__col">
-                        <label for="city">Ville :</label>
-                        <input type="text" id="city" name="user_city">
-                    </div>
-                </div>
-                     <div class="form__col">
-                        <label for="mail">e-mail :</label>
-                        <input type="email" id="mail" name="user_mail">
-                    </div>
-                </div>
-            </div>
+            
+
         </main>
 
         <footer>

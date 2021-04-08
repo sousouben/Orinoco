@@ -2,7 +2,7 @@
 function getProduitsPaniers(){ console.log('articles mis au panier');
     let affichagePanier= localStorage.getItem("Panier");
     if(affichagePanier == null){
-        document.getElementById('info').style.display='none';
+        document.getElementById('loginForm').style.display='none';
     }else{
         affichagePanier=JSON.parse(affichagePanier);
     for(let i=0 ; i<affichagePanier.length; i++){
@@ -42,33 +42,4 @@ function insertPanier(responce){
 window.onload= getProduitsPaniers();
 
 
-
-/*function validPanier(responce){
-    let valider=document.getElementById("clearCart");
-    console.log(responce)
-        valider.innerHTML= '<div class="container__cart__page">'
-            +'<div class="cart__page">'
-            +'<div class="container container__cart">'
-            +'<button class="clearCart">'
-            +'Vider le Panier'
-            +'<i class="fas fa-trash-alt fa-lg"></i>'
-            +'</button>'
-            +'<div class="cart" id="cart__list">'
-            +'</div>'
-            +'<p class="total__price">'
-            +'PRIX TOTAL : '
-            +'<span id="totalPrice">'
-            +'</span>'
-            +'€'
-            +'</p>'
-            +'</div>'
-            +'</div>' 
-            +'</div>'      
-}
-window.onload=getId();*/
-        
-
-
-            
-        
               
