@@ -228,5 +228,18 @@ color: black;
     width: 4rem;
   }
 
+.row{
+  margin: auto;
+  display: flex;
+}
+
+.cart__page{
+  padding: 0px 10px;
+}
+
+.item__list{
+  text-align:end;
+}
+
 
 /*********PANIER FIN******************/

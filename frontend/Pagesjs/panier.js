@@ -27,7 +27,7 @@ function Produit(iD) {
 
 function insertPanier(responce) {
     let articlePanier = document.getElementById("Panier");
-    console.log(responce)
+    console.log(responce);
     articlePanier.innerHTML += '<div class="container__cart__page">'
         + '<div class="cart__page">'
         + '<div class="img_produit">'
@@ -36,15 +36,18 @@ function insertPanier(responce) {
         + '<div class="item__list">'
         + '<div class="nom_produit">'
         + '<h3>' + responce.name + '</h3>'
-        + '</div>'
+        + '</div>'        
         + '<div class="prix-produit">'
         + '<p>' + responce.price / 100 + '€</p>'
         + '</div>'
         + '<i class="fas fa-times fa-lg"></i>'
         + '</div>'
+        + '<hr>'
 
 };
 window.onload = getProduitsPaniers();
+
+/*function totalPanier()*/
 
 
 //---------------------------FORMULAIRE----------------
