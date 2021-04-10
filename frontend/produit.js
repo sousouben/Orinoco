@@ -1,11 +1,11 @@
 /*Génération de l'URL de l'API selon le choix de produit à vendre
 **********************************************/
 let URLAPI = "http://localhost:3000/api/teddies";//Au choix entre : "cameras" - "furniture" - "teddies"
-if (URLAPI == null) {
+/*if (URLAPI == null) {
     alert("Nous sommes désolés, le serveur ne répond pas !");    // plan test
 } else {
     console.log('Vous etes connecté');    
-}
+}*/
 
 function Produit() {
     fetch(URLAPI)

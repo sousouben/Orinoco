@@ -4,6 +4,7 @@ function getProduitsPaniers() {
     let affichageLocalStoragePanier = localStorage.getItem("Panier");
     if (affichageLocalStoragePanier == null) {
         document.getElementById('loginForm').style.display = 'none';
+        console.log('panier vide');
     } else {
         affichageLocalStoragePanier = JSON.parse(affichageLocalStoragePanier);
         for (let i = 0; i < affichageLocalStoragePanier.length; i++) {
@@ -13,11 +14,11 @@ function getProduitsPaniers() {
 };
 
 let URLAPI = "http://localhost:3000/api/teddies/";
-if (URLAPI == null) {
+/*if (URLAPI == null) {
     alert("Nous sommes désolés, le serveur ne répond pas !");    // plan test
 } else {
     console.log('Vous etes connecté');
-};
+};*/
 
 function Produit(iD) {
     fetch(URLAPI + iD)
@@ -36,16 +37,31 @@ function insertPanier(responce) {
         + '<div class="item__list">'
         + '<div class="nom_produit">'
         + '<h3>' + responce.name + '</h3>'
-        + '</div>'        
+        + '</div>'
         + '<div class="prix-produit">'
         + '<p>' + responce.price / 100 + '€</p>'
         + '</div>'
-        + '<i class="fas fa-times fa-lg"></i>'
+        + '<button class="supprimer"><i class="fas fa-times fa-lg"></i></button>'
         + '</div>'
-        + '<hr>'
+        + '<hr>';
+    // gestion des suppression des produits
+    let btnSupprimer = document.querySelectorAll('.supprimer');
+    console.log(btnSupprimer);
+
+    for (let j = 0; j < btnSupprimer.length; j++) {
+        btnSupprimer[j].addEventListener("click", (event) => {
+            event.preventDefault();
+            console.log(event); //pour verifier si le click se fait correctement   
+        }
+        )
+    }
+
 
 };
 window.onload = getProduitsPaniers();
+
+
+
 
 /*function totalPanier()*/
 
@@ -71,8 +87,8 @@ prenom.addEventListener('change', function () {
     validFirstName(this);
 });
 
-email.addEventListener('change', function(){
-    validEmail(this);    
+email.addEventListener('change', function () {
+    validEmail(this);
 });
 
 adresse.addEventListener('change', function () {
@@ -236,27 +252,27 @@ const validCity = function (inputUserCity) {
 };
 
 // validation email***********************************
-const validEmail=function(inputEmail){
-        
-    let emailRegExp= new RegExp('^[a-zA-Z0-9.-_]+[@]{1}[a-zA-Z0-9.-_]+[.]{1}[a-z]{2,10}$', 'g');
-   
-    let small= inputEmail.nextElementSibling;
+const validEmail = function (inputEmail) {
+
+    let emailRegExp = new RegExp('^[a-zA-Z0-9.-_]+[@]{1}[a-zA-Z0-9.-_]+[.]{1}[a-z]{2,10}$', 'g');
+
+    let small = inputEmail.nextElementSibling;
     console.log(small);
 
     //on test l'expression régulière
-    if(emailRegExp.test(inputEmail.value)){
-        small.innerHTML='Adresse valide';
+    if (emailRegExp.test(inputEmail.value)) {
+        small.innerHTML = 'Adresse valide';
         small.classList.remove('text-danger');
         small.classList.add('text-success');
         return true;
-            }
-            else{
-                small.innerHTML='Adresse invalide';
-                small.classList.remove('text-success');
-                small.classList.add('text-danger');
-                return false;
-            }
-     
+    }
+    else {
+        small.innerHTML = 'Adresse invalide';
+        small.classList.remove('text-success');
+        small.classList.add('text-danger');
+        return false;
+    }
+
 };
 
 

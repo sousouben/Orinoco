@@ -10,11 +10,11 @@ function getId(){ console.log('ok');
     }
 
 let URLAPI = "http://localhost:3000/api/teddies/";
-if (URLAPI == null) {
+/*if (URLAPI == null) {
     alert("Nous sommes désolés, le serveur ne répond pas !");    // plan test
 } else {
     console.log('Vous etes connecté');    
-}
+}*/
 
 function Produit(iD) {
     fetch(URLAPI+iD)
