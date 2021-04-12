@@ -211,34 +211,12 @@ max: width 27rem;
 }
 /*******************ARTICLES FIN************/
 /*****************PANIER*********************/
-.container__cart__page{
-text-decoration: none;
-margin: 0;
-padding: 49px 26px;
-box-sizing: border-box;
-color: black;
+.table td{
+  vertical-align:middle;
 }
 
-.cart__page .container__cart {
-  max-width: 1220px;
-  margin: 0 auto;
-}
-
-.card__type__container img{
-    width: 4rem;
-  }
-
-.row{
-  margin: auto;
-  display: flex;
-}
-
-.cart__page{
-  padding: 0px 10px;
-}
-
-.item__list{
-  text-align:end;
+.container{
+  padding: 0;
 }
 
 

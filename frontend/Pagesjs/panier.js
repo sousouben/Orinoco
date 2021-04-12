@@ -30,20 +30,22 @@ function insertPanier(responce) {
     let articlePanier = document.getElementById("Panier");
     console.log(responce);
     articlePanier.innerHTML += '<div class="container__cart__page">'
-        + '<div class="cart__page">'
-        + '<div class="img_produit">'
+        + '<tr class="text-center">'
+        + '<td class="img_produit">'
         + '<img src="' + responce.imageUrl + '" >'
-        + '</div>'
-        + '<div class="item__list">'
-        + '<div class="nom_produit">'
+        + '</td>'
+        + '<td class="nom_produit">'
         + '<h3>' + responce.name + '</h3>'
-        + '</div>'
-        + '<div class="prix-produit">'
+        + '</td>'
+        + '<td class="prix-produit">'
         + '<p>' + responce.price / 100 + '€</p>'
+        + '</td>'
+        + '<td class="supprimer">'
+        + '<i class="fas fa-times fa-lg"></i>'
+        + '</td>'
+        + '</tr>'
         + '</div>'
-        + '<button class="supprimer"><i class="fas fa-times fa-lg"></i></button>'
-        + '</div>'
-        + '<hr>';
+        ;
     // gestion des suppression des produits
     let btnSupprimer = document.querySelectorAll('.supprimer');
     console.log(btnSupprimer);

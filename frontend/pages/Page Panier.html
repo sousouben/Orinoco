@@ -14,7 +14,8 @@
 </head>
 
 <body>
-    <div class="grid-container">
+    <div class="container col-12">
+
         <header class="header">
             <div class="logo">
                 <a href="../index.html"><img src="../logo/logo.jpg" alt="logo du site orinoco"></a>
@@ -25,50 +26,63 @@
             </nav>
         </header>
         <main>
-            <div id="Panier"></div>
-            <div id="panier-vide"></div>
-           
-            <div id="loginForm">
+            <div class="container p-5 mt-5">
                 <div class="row justify-content-center">
-                    <div class="col-8">
-                        <h2 class="my-5">Formulaire de livraison</h2>
-                        <form action="" method="POST">
-                            <!--nom-->
-                            <div class="form-group">
-                                <label for="name">Nom</label>
-                                <input type="text" class="form-control" id="name" name="user_lastname">
-                                <small></small>
-                            </div>
-                            <!--prénom-->
-                            <div class="form-group">
-                                <label for="firstname">Prénom</label>
-                                <input type="text" class="form-control" id="firstname" name="user_firstname">
-                                <small></small>
-                            </div>
-                            <!--adresse-->
-                            <div class="form-group">
-                                <label for="adress">Adresse</label>
-                                <input type="text" class="form-control" id="adress" name="user_adress">
-                                <small></small>
-                            </div>
-                            <!--Ville-->
-                            <div class="form-group">
-                                <label for="city">Ville</label>
-                                <input type="text" class="form-control" id="city" name="user_city">
-                                <small></small>
-                            </div>
-                            <!--email-->
-                            <div class="form-group">
-                                <label for="email">Email</label>
-                                <input type="text" class="form-control" id="email" name="email">
-                                <small></small>
-                            </div>
-                            <!--inscription-->
-                            <div class="form-group">
-                                <button type="submit" id="submit"
-                                    class="btn btn-secondary ">validation</button>
-                            </div>
-                        </form>
+                    <table class="table table-image">
+                        <thead class="thead-dark">
+                            <tr class="text-center">
+                                <th>Image</th>
+                                <th>Nom</th>
+                                <th>Prix</th>
+                                <th>Supprimer</th>
+                            </tr>
+                        </thead>
+                        <tbody id="Panier"></tbody>
+                    </table>
+                </div>
+                <div id="panier-vide"></div>
+
+                <div id="loginForm">
+                    <div class="row justify-content-center">
+                        <div class="col-8">
+                            <h2 class="my-5">Formulaire de livraison</h2>
+                            <form action="" method="POST">
+                                <!--nom-->
+                                <div class="form-group">
+                                    <label for="name">Nom</label>
+                                    <input type="text" class="form-control" id="name" name="user_lastname">
+                                    <small></small>
+                                </div>
+                                <!--prénom-->
+                                <div class="form-group">
+                                    <label for="firstname">Prénom</label>
+                                    <input type="text" class="form-control" id="firstname" name="user_firstname">
+                                    <small></small>
+                                </div>
+                                <!--adresse-->
+                                <div class="form-group">
+                                    <label for="adress">Adresse</label>
+                                    <input type="text" class="form-control" id="adress" name="user_adress">
+                                    <small></small>
+                                </div>
+                                <!--Ville-->
+                                <div class="form-group">
+                                    <label for="city">Ville</label>
+                                    <input type="text" class="form-control" id="city" name="user_city">
+                                    <small></small>
+                                </div>
+                                <!--email-->
+                                <div class="form-group">
+                                    <label for="email">Email</label>
+                                    <input type="text" class="form-control" id="email" name="email">
+                                    <small></small>
+                                </div>
+                                <!--inscription-->
+                                <div class="form-group">
+                                    <button type="submit" id="submit" class="btn btn-secondary ">validation</button>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -96,6 +110,7 @@
                 </ul>
             </div>
         </footer>
+
     </div>
     <script src="../Pagesjs/panier.js" defer></script>
 </body>
