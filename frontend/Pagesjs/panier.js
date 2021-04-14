@@ -2,10 +2,10 @@
 function getProduitsPaniers() {
     console.log('articles mis au panier');
     let affichageLocalStoragePanier = localStorage.getItem("Panier");
-    if (affichageLocalStoragePanier == null) {
-        document.getElementById('loginForm').style.display = 'none';
+    if (affichageLocalStoragePanier == null || affichageLocalStoragePanier.length === 0) {// si le panier est vide 
+        document.getElementById('loginForm').style.display = 'none';        
         console.log('panier vide');
-    } else {
+    } else {// si des éléments sont présents dans le panier : récupération des éléments du panier
         affichageLocalStoragePanier = JSON.parse(affichageLocalStoragePanier);
         for (let i = 0; i < affichageLocalStoragePanier.length; i++) {
             Produit(affichageLocalStoragePanier[i]);
@@ -22,50 +22,55 @@ let URLAPI = "http://localhost:3000/api/teddies/";
 
 function Produit(iD) {
     fetch(URLAPI + iD)
-        .then(responce => responce.json())
-        .then(responce => insertPanier(responce))
+        .then(response => response.json())
+        .then(data => insertPanier(data))
+        .catch((err) => console.log('Erreur :' + err));
 };
 
-function insertPanier(responce) {
+
+function insertPanier(data) {
     let articlePanier = document.getElementById("Panier");
-    console.log(responce);
+    console.log(data);
     articlePanier.innerHTML += '<div class="container__cart__page">'
         + '<tr class="text-center">'
-        + '<td class="img_produit">'
-        + '<img src="' + responce.imageUrl + '" >'
+        + '<td class="img_produit align-middle">'
+        + '<img src="' + data.imageUrl + '" >'
         + '</td>'
-        + '<td class="nom_produit">'
-        + '<h3>' + responce.name + '</h3>'
+        + '<td class="nom_produit align-middle">'
+        + '<h3>' + data.name + '</h3>'
         + '</td>'
-        + '<td class="prix-produit">'
-        + '<p>' + responce.price / 100 + '€</p>'
+        + '<td class="prix-produit align-middle">'
+        + '<p>' + data.price / 100 + '€</p>'
         + '</td>'
-        + '<td class="supprimer">'
+        + '<td class="supprimer align-middle">'
         + '<i class="fas fa-times fa-lg"></i>'
         + '</td>'
         + '</tr>'
         + '</div>'
         ;
-    // gestion des suppression des produits
+    // ----------gestion des suppressions des produits
     let btnSupprimer = document.querySelectorAll('.supprimer');
     console.log(btnSupprimer);
 
     for (let j = 0; j < btnSupprimer.length; j++) {
         btnSupprimer[j].addEventListener("click", (event) => {
-            event.preventDefault();
-            console.log(event); //pour verifier si le click se fait correctement   
+            event.preventDefault();//pour eviter que la page se recharge
+            //console.log(event); //pour verifier si le click se fait correctement  
+            
         }
         )
     }
 
-
+    
 };
 window.onload = getProduitsPaniers();
+//--------------vider panier
+
+//--------------Montant total panier
+
+//Aller chercher les prix dans le panier
 
 
-
-
-/*function totalPanier()*/
 
 
 //---------------------------FORMULAIRE----------------

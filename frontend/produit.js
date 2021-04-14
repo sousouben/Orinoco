@@ -9,37 +9,39 @@ let URLAPI = "http://localhost:3000/api/teddies";//Au choix entre : "cameras" - 
 
 function Produit() {
     fetch(URLAPI)
-        .then(responce => responce.json())// fetch va chercher l'URL + transformation de la réponse en jso
-        .then(responce => insertProduit(responce))//.then sert à attacher les functions 
-}
+        .then(response => response.json())// fetch va chercher l'URL + transformation de la réponse en jso
+        .then(data => insertProduit(data))//.then sert à attacher les functions 
+        .catch((err) => console.log('Erreur :' + err));
+};
 
-function insertProduit(responce) {
+function insertProduit(data) {
     let articleProduit = document.getElementById("listeProduit");//Lien avec la page index HTML
-    for (let i = 0; i < responce.length; i++) {
-        articleProduit.innerHTML += '<article id="produit">' //création de la structure index HTML
+    for (let i = 0; i < data.length; i++) {
+        articleProduit.innerHTML += '<article id="produit">'//création de la structure index HTML
+            + '<a href="pages/Page%20article.html?id=' + data[i]._id + '">'
             + '<div class="main_produit">'
             + '<div class="image">'
             + '<section class="produit_item">'
             + '<div class="img_produit">'
-            + '<img src="' + responce[i].imageUrl + '" >'
+            + '<img src="' + data[i].imageUrl + '" >'
             + '</div>'
             + '<div class="nom_produit">'
-            + '<h3>' + responce[i].name + '</h3>'
+            + '<h3>' + data[i].name + '</h3>'
             + '</div>'
             + '<div class="prix-produit">'
-            + '<p>' + responce[i].price / 100 + '€</p>'
+            + '<p>' + data[i].price / 100 + '€</p>'
             + '</div>'
-            + '<div>'
-            + '<a href="pages/Page%20article.html?id=' + responce[i]._id + '">'
-            + '<button> voir ce produit </button>'
-            + '</a>'
+            + '<div>'            
+            + '<button> voir ce produit </button>'            
             + '</div>'
             + '</section>'
             + '</div>'
             + '</div>'
+            + '</a>'
             + '</article>';
 
     }
+    
 }
 
 window.onload = Produit();
