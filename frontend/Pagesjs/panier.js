@@ -1,17 +1,20 @@
 //    Affichage des articles mis dans le localstorage panier 
 function getProduitsPaniers() {
     console.log('articles mis au panier');
-    let affichageLocalStoragePanier = localStorage.getItem("Panier");
+    
     if (affichageLocalStoragePanier == null || affichageLocalStoragePanier.length === 0) {// si le panier est vide 
         document.getElementById('loginForm').style.display = 'none';        
         console.log('panier vide');
     } else {// si des éléments sont présents dans le panier : récupération des éléments du panier
-        affichageLocalStoragePanier = JSON.parse(affichageLocalStoragePanier);
+        
         for (let i = 0; i < affichageLocalStoragePanier.length; i++) {
-            Produit(affichageLocalStoragePanier[i]);
+            Produit(affichageLocalStoragePanier[i],i);
         }
     }
 };
+
+let affichageLocalStoragePanier = localStorage.getItem("Panier");
+affichageLocalStoragePanier = JSON.parse(affichageLocalStoragePanier);
 
 let URLAPI = "http://localhost:3000/api/teddies/";
 /*if (URLAPI == null) {
@@ -20,15 +23,15 @@ let URLAPI = "http://localhost:3000/api/teddies/";
     console.log('Vous etes connecté');
 };*/
 
-function Produit(iD) {
+function Produit(iD,i) {
     fetch(URLAPI + iD)
         .then(response => response.json())
-        .then(data => insertPanier(data))
+        .then(data => insertPanier(data,i))
         .catch((err) => console.log('Erreur :' + err));
 };
 
 
-function insertPanier(data) {
+function insertPanier(data,i) {
     let articlePanier = document.getElementById("Panier");
     console.log(data);
     articlePanier.innerHTML += '<div class="container__cart__page">'
@@ -42,21 +45,18 @@ function insertPanier(data) {
         + '<td class="prix-produit align-middle">'
         + '<p>' + data.price / 100 + '€</p>'
         + '</td>'
-        + '<td class="supprimer align-middle">'
-        + '<i class="fas fa-times fa-lg"></i>'
+        + '<td class=" align-middle">'
+        + '<button id="supprimer'+ i +'"><i class="fas fa-times fa-lg"></i></button>'
         + '</td>'
         + '</tr>'
         + '</div>'
         ;
     // ----------gestion des suppressions des produits
-    let btnSupprimer = document.querySelectorAll('.supprimer');
-    console.log(btnSupprimer);
+    
+    for (let j = 0; j <affichageLocalStoragePanier.length; j++) {
+        let btnSupprimer = document.getElementById('supprimer'+ j).addEventListener("click", (event) => {
+            supprimerProduit(j)
 
-    for (let j = 0; j < btnSupprimer.length; j++) {
-        btnSupprimer[j].addEventListener("click", (event) => {
-            event.preventDefault();//pour eviter que la page se recharge
-            //console.log(event); //pour verifier si le click se fait correctement  
-            
         }
         )
     }
@@ -64,9 +64,12 @@ function insertPanier(data) {
     
 };
 
-
-
-//--------------vider panier
+function supprimerProduit(j){
+    console.log(affichageLocalStoragePanier);
+    affichageLocalStoragePanier.splice(j,1);
+    localStorage.setItem("Panier",JSON.stringify(affichageLocalStoragePanier));
+    document.location.reload(true);
+}
 
 //--------------Montant total panier
 //Prix total de la commande 
@@ -85,30 +88,68 @@ let prenom = document.getElementById("firstname");
 let email = document.getElementById("email");
 let adresse = document.getElementById("adress");
 let ville = document.getElementById("city");
-
+let formulaire = document.getElementById('submit');
+let valid1;
+let valid2;
+let valid3;
+let valid4;
+let valid5;
 
 // écouter les modidfications
+formulaire.addEventListener('click', function(e){
+    e.preventDefault();
+    if(valid1 && valid2 && valid3 && valid4 && valid5){
+        let contact = {
+            firstName: nom.value,
+            lastName: prenom.value,
+            address: adresse.value,
+            city: ville.value,
+            email: email.value
+        }
+        let products = affichageLocalStoragePanier
+        let object= {
+            contact,products
+        }
+        const option = {
+            method: "POST",
+            body: JSON.stringify(object),
+            headers: {
+                "Content-Type": "application/json"
+            }
+
+        }
+        console.log(object);
+        console.log(option);
+        fetch(URLAPI + 'order',option).then(response => response.json())
+        .then(response =>{localStorage.removeItem("Panier")
+        localStorage.setItem("numero de commande",response.orderId)
+        console.log(response.orderId);
+    })
+        console.log('le formulaire est ok');        
+    }else{
+        console.log("le formulaire est incorrect");
+    }
+});
 
 nom.addEventListener('change', function () {
-    validName(this);
+    valid1=validName(this);
 });
 
 prenom.addEventListener('change', function () {
-    validFirstName(this);
+    valid2=validFirstName(this);
 });
 
 email.addEventListener('change', function () {
-    validEmail(this);
+    valid3=validEmail(this);
 });
 
 adresse.addEventListener('change', function () {
-    validAdresse(this);
+    valid4=validAdresse(this);
 });
 
 ville.addEventListener('change', function () {
-    validCity(this);
+    valid5=validCity(this);
 });
-
 
 //validation du nom
 
