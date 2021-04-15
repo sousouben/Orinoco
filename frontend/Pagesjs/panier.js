@@ -63,10 +63,13 @@ function insertPanier(data) {
 
     
 };
-window.onload = getProduitsPaniers();
+
+
+
 //--------------vider panier
 
 //--------------Montant total panier
+//Prix total de la commande 
 
 //Aller chercher les prix dans le panier
 
@@ -282,4 +285,7 @@ const validEmail = function (inputEmail) {
 
 };
 
+
+// Appel de fonctions
+window.onload = getProduitsPaniers();
 

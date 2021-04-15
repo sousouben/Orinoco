@@ -53,10 +53,10 @@ function insertProduit(data){
          +'</article>';
          let listeColor=document.getElementById("select");
             for(let i= 0;i < data.colors.length; i++){
-                listeColor.innerHTML+='<option value="'+ data.colors[i]+ '">'
+                listeColor.innerHTML+='<option value="'+ data.colors[i]+ '">'                
                 + data.colors[i]
                 +'</option>'
-              
+                
             }
 
             document.getElementById("ajouter").addEventListener("click",function(){
@@ -72,6 +72,8 @@ function insertProduit(data){
             
 }
 
+// Appel de fonctions
 window.onload= getId();
+
 
    
