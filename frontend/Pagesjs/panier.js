@@ -1,7 +1,6 @@
 //    Affichage des articles mis dans le localstorage panier 
 function getProduitsPaniers() {
-    
-    if (affichageLocalStoragePanier == null || affichageLocalStoragePanier.length === 0) {// si le panier est vide 
+        if (affichageLocalStoragePanier == null || affichageLocalStoragePanier.length === 0) {// si le panier est vide 
         document.getElementById('loginForm').style.display = 'none';
         document.getElementById('panier-vide').innerHTML= "<p class='color'>Le panier est vide <i class='fas fa-frown'></i></p>";
        
@@ -13,8 +12,10 @@ function getProduitsPaniers() {
     }
 };
 
+
 let affichageLocalStoragePanier = localStorage.getItem("Panier");
 affichageLocalStoragePanier = JSON.parse(affichageLocalStoragePanier);
+/*console.log(affichageLocalStoragePanier);*/
 
 let URLAPI = "http://localhost:3000/api/teddies/";
 

@@ -3,13 +3,16 @@
 let URLAPI = "http://localhost:3000/api/teddies";//Au choix entre : "cameras" - "furniture" - "teddies"
 
 function Produit() {
-    fetch(URLAPI)
+    fetch(URLAPI)    
         .then(response => response.json())// fetch va chercher l'URL + transformation de la réponse en jso
         .then(data => insertProduit(data))//.then sert à attacher les functions 
+        
         .catch((err) => console.log('Erreur :' + err));
 };
 
+
 function insertProduit(data) {
+       /*console.log(data);*/
     let articleProduit = document.getElementById("listeProduit");//Lien avec la page index HTML
     for (let i = 0; i < data.length; i++) {
         articleProduit.innerHTML += '<article id="produit">'//création de la structure index HTML
@@ -34,6 +37,7 @@ function insertProduit(data) {
             + '</div>'
             + '</a>'
             + '</article>';
+            
     }
 }
 
