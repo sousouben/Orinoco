@@ -1,14 +1,14 @@
 //    Affichage des articles mis dans le localstorage panier 
 function getProduitsPaniers() {
-    console.log('articles mis au panier');
     
     if (affichageLocalStoragePanier == null || affichageLocalStoragePanier.length === 0) {// si le panier est vide 
-        document.getElementById('loginForm').style.display = 'none';        
-        console.log('panier vide');
-    } else {// si des éléments sont présents dans le panier : récupération des éléments du panier
-        
+        document.getElementById('loginForm').style.display = 'none';
+        document.getElementById('panier-vide').innerHTML= "<p class='color'>Le panier est vide <i class='fas fa-frown'></i></p>";
+       
+    } else {
         for (let i = 0; i < affichageLocalStoragePanier.length; i++) {
-            Produit(affichageLocalStoragePanier[i],i);
+            Produit(affichageLocalStoragePanier[i], i);
+            console.log('articles mis au panier');
         }
     }
 };
@@ -17,21 +17,16 @@ let affichageLocalStoragePanier = localStorage.getItem("Panier");
 affichageLocalStoragePanier = JSON.parse(affichageLocalStoragePanier);
 
 let URLAPI = "http://localhost:3000/api/teddies/";
-/*if (URLAPI == null) {
-    alert("Nous sommes désolés, le serveur ne répond pas !");    // plan test
-} else {
-    console.log('Vous etes connecté');
-};*/
 
-function Produit(iD,i) {
+function Produit(iD, i) {
     fetch(URLAPI + iD)
         .then(response => response.json())
-        .then(data => insertPanier(data,i))
+        .then(data => insertPanier(data, i))
         .catch((err) => console.log('Erreur :' + err));
 };
 
 
-function insertPanier(data,i) {
+function insertPanier(data, i) {
     let articlePanier = document.getElementById("Panier");
     console.log(data);
     articlePanier.innerHTML += '<div class="container__cart__page">'
@@ -46,38 +41,28 @@ function insertPanier(data,i) {
         + '<p>' + data.price / 100 + '€</p>'
         + '</td>'
         + '<td class=" align-middle">'
-        + '<button id="supprimer'+ i +'"><i class="fas fa-times fa-lg"></i></button>'
+        + '<button id="supprimer' + i + '"><i class="fas fa-times fa-lg"></i></button>'
         + '</td>'
         + '</tr>'
         + '</div>'
         ;
     // ----------gestion des suppressions des produits
-    
-    for (let j = 0; j <affichageLocalStoragePanier.length; j++) {
-        let btnSupprimer = document.getElementById('supprimer'+ j).addEventListener("click", (event) => {
-            supprimerProduit(j)
 
+    for (let j = 0; j < affichageLocalStoragePanier.length; j++) {
+        let btnSupprimer = document.getElementById('supprimer' + j).addEventListener("click", (event) => {
+            supprimerProduit(j)
         }
         )
+        
     }
-
-    
 };
 
-function supprimerProduit(j){
+function supprimerProduit(j) {
     console.log(affichageLocalStoragePanier);
-    affichageLocalStoragePanier.splice(j,1);
-    localStorage.setItem("Panier",JSON.stringify(affichageLocalStoragePanier));
+    affichageLocalStoragePanier.splice(j, 1);
+    localStorage.setItem("Panier", JSON.stringify(affichageLocalStoragePanier));
     document.location.reload(true);
 }
-
-//--------------Montant total panier
-//Prix total de la commande 
-
-//Aller chercher les prix dans le panier
-
-
-
 
 //---------------------------FORMULAIRE----------------
 
@@ -96,9 +81,9 @@ let valid4;
 let valid5;
 
 // écouter les modidfications
-formulaire.addEventListener('click', function(e){
+formulaire.addEventListener('click', function (e) {
     e.preventDefault();
-    if(valid1 && valid2 && valid3 && valid4 && valid5){
+    if (valid1 && valid2 && valid3 && valid4 && valid5) {
         let contact = {
             firstName: nom.value,
             lastName: prenom.value,
@@ -107,8 +92,8 @@ formulaire.addEventListener('click', function(e){
             email: email.value
         }
         let products = affichageLocalStoragePanier
-        let object= {
-            contact,products
+        let object = {
+            contact, products
         }
         const option = {
             method: "POST",
@@ -120,35 +105,39 @@ formulaire.addEventListener('click', function(e){
         }
         console.log(object);
         console.log(option);
-        fetch(URLAPI + 'order',option).then(response => response.json())
-        .then(response =>{localStorage.removeItem("Panier")
-        localStorage.setItem("numero de commande",response.orderId)
-        console.log(response.orderId);
-    })
-        console.log('le formulaire est ok');        
-    }else{
+        fetch(URLAPI + 'order', option)
+            .then(response => response.json())
+            .then(response => {
+                localStorage.removeItem("Panier")//vider le panier
+                localStorage.setItem("numero de commande", response.orderId)//récupération du numéro de commande 
+                console.log(response.orderId);//numéro decommande
+                
+            })
+        window.location.href = "confirmation.html";//ouverture de la page confirmation
+        console.log('le formulaire est ok');
+    } else {
         console.log("le formulaire est incorrect");
     }
 });
 
 nom.addEventListener('change', function () {
-    valid1=validName(this);
+    valid1 = validName(this);
 });
 
 prenom.addEventListener('change', function () {
-    valid2=validFirstName(this);
+    valid2 = validFirstName(this);
 });
 
 email.addEventListener('change', function () {
-    valid3=validEmail(this);
+    valid3 = validEmail(this);
 });
 
 adresse.addEventListener('change', function () {
-    valid4=validAdresse(this);
+    valid4 = validAdresse(this);
 });
 
 ville.addEventListener('change', function () {
-    valid5=validCity(this);
+    valid5 = validCity(this);
 });
 
 //validation du nom
@@ -173,7 +162,7 @@ const validName = function (inputUserLastName) {
     }
     //affichage
     // récupréation balise small
-    let small = inputUserLastName.nextElementSibling;
+    let small = inputUserLastName.nextElementSibling;//permet de cibler l'element après input
 
     //on test l'expression régulière
     if (valid) {
@@ -190,7 +179,7 @@ const validName = function (inputUserLastName) {
     }
 };
 
-//validation du prénom
+//////validation du prénom
 
 const validFirstName = function (inputUserFurstName) {
     let msg;
@@ -227,7 +216,7 @@ const validFirstName = function (inputUserFurstName) {
     }
 };
 
-//validation de l'adresse
+//////validation de l'adresse
 
 const validAdresse = function (inputUserAdress) {
     let msg;
@@ -265,14 +254,14 @@ const validAdresse = function (inputUserAdress) {
     }
 };
 
-//validation de la ville
+//////validation de la ville
 
 const validCity = function (inputUserCity) {
     let msg;
     let valid = false;
 
     if (inputUserCity.value.length < 3) {
-        msg = 'le prénom doit contenir au moins 3 caractères';
+        msg = 'la ville doit contenir au moins 3 caractères';
     }
     else if (/[0-9]/.test(inputUserCity.value)) {
         msg = 'la ville ne doit pas contenir de chiffre';
@@ -302,7 +291,7 @@ const validCity = function (inputUserCity) {
     }
 };
 
-// validation email***********************************
+///// validation email***********************************
 const validEmail = function (inputEmail) {
 
     let emailRegExp = new RegExp('^[a-zA-Z0-9.-_]+[@]{1}[a-zA-Z0-9.-_]+[.]{1}[a-z]{2,10}$', 'g');
@@ -312,13 +301,13 @@ const validEmail = function (inputEmail) {
 
     //on test l'expression régulière
     if (emailRegExp.test(inputEmail.value)) {
-        small.innerHTML = 'Adresse valide';
+        small.innerHTML = 'Email valide';
         small.classList.remove('text-danger');
         small.classList.add('text-success');
         return true;
     }
     else {
-        small.innerHTML = 'Adresse invalide';
+        small.innerHTML = 'Email invalide';
         small.classList.remove('text-success');
         small.classList.add('text-danger');
         return false;
@@ -327,6 +316,6 @@ const validEmail = function (inputEmail) {
 };
 
 
-// Appel de fonctions
+/////////////////////// Appel de fonctions////////////////////////////////
 window.onload = getProduitsPaniers();
 

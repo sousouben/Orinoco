@@ -6,25 +6,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="description" content="Vente en ligne d'ours en peluche faits main de qualité Française." />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="../style.css">
     <script src="https://kit.fontawesome.com/56ca006626.js" crossorigin="anonymous"></script>
-    <title>Articles - Orinoco</title>
+    <title>Confirmation de commande - Orinoco</title>
 </head>
 
 <body>
     <div class="grid-container">
         <header class="header">
             <div class="logo">
-                <a href="../index.html"><img src="../logo/logo.jpg" alt="logo du site orinoco"></a>
+                <a href="../index.html" title="Accueil"><img src="../logo/logo.jpg" alt="logo du site orinoco"></a>
             </div>
             <nav class="menu">
-                <a href="../index.html"><i class="fas fa-paw"></i></a>
-                <a href="../pages/Page%20Panier.html"><i class="fas fa-shopping-cart"></i></a>
+                <a href="../index.html" title="Produits"><i class="fas fa-paw"></i></a>
+                <a href="../pages/Panier.html" title="Panier"><i class="fas fa-shopping-cart"></i></a>
             </nav>
         </header>
-
-        <main>
-            <div id="article_ours"></div>
+        <main class="container" id="confirm">
+            
+            <div class="my-5 py-2 text-center">
+                <p id="orderId"></p>                
+                                
+            </div>
+    
         </main>
 
         <footer>
@@ -48,7 +54,7 @@
             </div>
         </footer>
     </div>
-    <script src="../Pagesjs/article.js" defer></script>
+    <script src="../Pagesjs/confirmation.js" defer></script>
 </body>
 
 </html>

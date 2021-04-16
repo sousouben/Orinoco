@@ -10,11 +10,6 @@ function getId(){ console.log('ok');
     }
 
 let URLAPI = "http://localhost:3000/api/teddies/";
-/*if (URLAPI == null) {
-    alert("Nous sommes désolés, le serveur ne répond pas !");    // plan test
-} else {
-    console.log('Vous etes connecté');    
-}*/
 
 function Produit(iD) {
     fetch(URLAPI+iD)
@@ -51,6 +46,7 @@ function insertProduit(data){
          +'</div>' 
          +'</section>' 
          +'</article>';
+
          let listeColor=document.getElementById("select");
             for(let i= 0;i < data.colors.length; i++){
                 listeColor.innerHTML+='<option value="'+ data.colors[i]+ '">'                
@@ -67,6 +63,7 @@ function insertProduit(data){
                 panier.push(idProduct);
                 localStorage.setItem("Panier",JSON.stringify(panier));
                 alert("produit bien ajouté au panier");
+                window.location.href = "Panier.html";
             });
             
             

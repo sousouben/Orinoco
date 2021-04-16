@@ -219,5 +219,23 @@ max: width 27rem;
   padding: 0;
 }
 
+.align-middle button{
+  border: none;
+  background-color: white;
+}
+
+.row{
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.color .fas{
+  color: #A567BC;
+}
+
+.color{
+  margin-top: 1rem;
+}
+
 
 /*********PANIER FIN******************/

@@ -1,11 +1,6 @@
 /*Génération de l'URL de l'API selon le choix de produit à vendre
 **********************************************/
 let URLAPI = "http://localhost:3000/api/teddies";//Au choix entre : "cameras" - "furniture" - "teddies"
-/*if (URLAPI == null) {
-    alert("Nous sommes désolés, le serveur ne répond pas !");    // plan test
-} else {
-    console.log('Vous etes connecté');    
-}*/
 
 function Produit() {
     fetch(URLAPI)
@@ -18,7 +13,7 @@ function insertProduit(data) {
     let articleProduit = document.getElementById("listeProduit");//Lien avec la page index HTML
     for (let i = 0; i < data.length; i++) {
         articleProduit.innerHTML += '<article id="produit">'//création de la structure index HTML
-            + '<a href="pages/Page%20article.html?id=' + data[i]._id + '">'
+            + '<a href="pages/article.html?id=' + data[i]._id + '">'
             + '<div class="main_produit">'
             + '<div class="image">'
             + '<section class="produit_item">'
@@ -39,9 +34,7 @@ function insertProduit(data) {
             + '</div>'
             + '</a>'
             + '</article>';
-
     }
-    
 }
 
 // Appel de fonctions
