@@ -39,13 +39,14 @@ function insertProduit(data){
          +'<h4>Description</h4>'
          +'<p>'+ data.description+'</p>'
          +'<div>'
-         +'<select id="select"></select>'
+         +'<select id="select"><option selected disabled value="">choose..</option></select>'
          + '<a href="#">'
          + '<button id="ajouter"> ajouter au panier </button>'
          + '</a>'
          +'</div>' 
          +'</section>' 
          +'</article>';
+        
 
          let listeColor=document.getElementById("select");
             for(let i= 0;i < data.colors.length; i++){

@@ -56,6 +56,19 @@ function insertPanier(data, i) {
         )
         
     }
+
+   
+    //----------prix total
+    for(k = 0;k < affichageLocalStoragePanier.length; k++){
+        let totalPrix=data.price;
+        let total = 0 ;        
+        totalPrix = total + affichageLocalStoragePanier;
+        console.log(totalPrix.length);
+        //Stockage du prix dans le localStorage pour la page de confirmation
+        localStorage.setItem("totalOrder", JSON.stringify(totalPrix));
+    }
+
+    
 };
 
 function supprimerProduit(j) {

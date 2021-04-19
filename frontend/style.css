@@ -203,7 +203,7 @@ max: width 27rem;
 }
 
 .description select{
-  padding: 9px 16px;
+  padding: 9px 1px;
     background-color: white;
     border: 1px solid var(--text-btn-color);
     border-radius:15px 0px 0px 15px;
@@ -224,9 +224,15 @@ max: width 27rem;
   background-color: white;
 }
 
+.row1{
+  margin-left: 2rem;
+  margin-right: 2rem;
+  margin-top: 8rem;
+}
+
 .row{
-  margin-left: 0;
-  margin-right: 0;
+  margin-left: 2rem;
+  margin-right: 2rem;
 }
 
 .color .fas{
