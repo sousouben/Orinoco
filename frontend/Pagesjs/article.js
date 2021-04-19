@@ -52,8 +52,7 @@ function insertProduit(data){
             for(let i= 0;i < data.colors.length; i++){
                 listeColor.innerHTML+='<option value="'+ data.colors[i]+ '">'                
                 + data.colors[i]
-                +'</option>'
-                
+                +'</option>';                
             }
 
             document.getElementById("ajouter").addEventListener("click",function(){
@@ -63,11 +62,13 @@ function insertProduit(data){
                     }
                 panier.push(idProduct);
                 localStorage.setItem("Panier",JSON.stringify(panier));
-                alert("produit bien ajouté au panier");
-                window.location.href = "Panier.html";
+                if(window.confirm("Article bien ajouté au panier.Souhaitez vous consulter votre panier ?")){
+                    window.location.href = "Panier.html";
+                } else {
+                    window.location.href = "../index.html";
+                }
+                
             });
-            
-            
 }
 
 // Appel de fonctions
