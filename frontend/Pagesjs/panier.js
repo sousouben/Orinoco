@@ -2,7 +2,7 @@
 function getProduitsPaniers() {
         if (affichageLocalStoragePanier == null || affichageLocalStoragePanier.length === 0) {// si le panier est vide 
         document.getElementById('loginForm').style.display = 'none';
-        document.getElementById('panier-vide').innerHTML= "<p class='color'>Le panier est vide <i class='fas fa-frown'></i></p>";
+        document.getElementById('panier-vide').innerHTML= "<p class='color'>Votre panier Orinounours est vide <i class='fas fa-frown'></i></p>";
        
     } else {
         for (let i = 0; i < affichageLocalStoragePanier.length; i++) {
@@ -128,9 +128,10 @@ formulaire.addEventListener('click', function (e) {
                 
             })
         window.location.href = "confirmation.html";//ouverture de la page confirmation
-        console.log('le formulaire est ok');
+        console.log('le formulaire est valide');
     } else {
         console.log("le formulaire est incorrect");
+        alert("veuillez remplir le formulaire pour valider la commande...");
     }
 });
 

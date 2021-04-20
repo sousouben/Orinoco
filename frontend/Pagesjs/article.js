@@ -60,7 +60,7 @@ function insertProduit(data){
                 if(panier==null){ 
                     panier=[];
                     }
-                panier.push(idProduct);
+                panier.push(idProduct);                
                 localStorage.setItem("Panier",JSON.stringify(panier));
                 if(window.confirm("Article bien ajouté au panier.Souhaitez vous consulter votre panier ?")){
                     window.location.href = "Panier.html";
