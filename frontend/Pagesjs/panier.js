@@ -62,10 +62,10 @@ function insertPanier(data, i) {
     for(k = 0;k < affichageLocalStoragePanier.length; k++){
         let totalPrix=data.price;
         let total = 0 ;        
-        totalPrix = total + affichageLocalStoragePanier;
-        console.log(totalPrix.length);
+        total =  totalPrix + affichageLocalStoragePanier;
+        console.log(total.length);
         //Stockage du prix dans le localStorage pour la page de confirmation
-        localStorage.setItem("totalOrder", JSON.stringify(totalPrix));
+        localStorage.setItem("totalOrder", JSON.stringify(total));
     }
 
     
