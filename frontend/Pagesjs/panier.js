@@ -1,3 +1,5 @@
+let total = 0;
+
 //    Affichage des articles mis dans le localstorage panier 
 function getProduitsPaniers() {
         if (affichageLocalStoragePanier == null || affichageLocalStoragePanier.length === 0) {// si le panier est vide 
@@ -23,13 +25,14 @@ function Produit(iD, i) {
     fetch(URLAPI + iD)
         .then(response => response.json())
         .then(data => insertPanier(data, i))
-        .catch((err) => console.log('Erreur :' + err));
+        
 };
 
 
 function insertPanier(data, i) {
     let articlePanier = document.getElementById("Panier");
     console.log(data);
+    total += data.price;
     articlePanier.innerHTML += '<div class="container__cart__page">'
         + '<tr class="text-center">'
         + '<td class="img_produit align-middle">'
@@ -48,34 +51,30 @@ function insertPanier(data, i) {
         + '</div>'
         ;
     // ----------gestion des suppressions des produits
-
     for (let j = 0; j < affichageLocalStoragePanier.length; j++) {
-        let btnSupprimer = document.getElementById('supprimer' + j).addEventListener("click", (event) => {
-            supprimerProduit(j)
-        }
-        )
-        
+        let btnSupprimer = document.getElementById('supprimer' + j);
+        btnSupprimer.addEventListener("click", (event) => {
+            supprimerProduit(j);
+            alert("cet article va etre suprimé!");
+        })        
     }
-
+    
+          
    
-    //----------prix total
-    for(k = 0;k < affichageLocalStoragePanier.length; k++){
-        let totalPrix=data.price;
-        let total = 0 ;        
-        total =  totalPrix + affichageLocalStoragePanier;
-        console.log(total.length);
+    //----------prix total du panier
+    
         //Stockage du prix dans le localStorage pour la page de confirmation
         localStorage.setItem("totalOrder", JSON.stringify(total));
-    }
-
-    
+        let totalPanier = document.getElementById('prix_panier');
+        totalPanier.innerHTML = total / 100 + '€'
+        
 };
 
 function supprimerProduit(j) {
     console.log(affichageLocalStoragePanier);
-    affichageLocalStoragePanier.splice(j, 1);
-    localStorage.setItem("Panier", JSON.stringify(affichageLocalStoragePanier));
-    document.location.reload(true);
+    affichageLocalStoragePanier.splice(j, 1);//splice()retire un élément du panier
+    localStorage.setItem("Panier", JSON.stringify(affichageLocalStoragePanier));//setitem() les ajoute à l'emplacement de stockage
+    document.location.reload(true);//La méthode Location.reload() recharge la ressource depuis l'URL actuelle.
 }
 
 //---------------------------FORMULAIRE----------------
@@ -327,9 +326,7 @@ const validEmail = function (inputEmail) {
         small.classList.add('text-danger');
         return false;
     }
-
 };
-
 
 /////////////////////// Appel de fonctions////////////////////////////////
 window.onload = getProduitsPaniers();

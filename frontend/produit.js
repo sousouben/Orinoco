@@ -3,11 +3,10 @@
 let URLAPI = "http://localhost:3000/api/teddies";//Au choix entre : "cameras" - "furniture" - "teddies"
 
 function Produit() {
-    fetch(URLAPI)    
+    fetch(URLAPI)   //fetch  récupérer des ressources à travers le réseau de manière asynchrone.
         .then(response => response.json())// fetch va chercher l'URL + transformation de la réponse en jso
-        .then(data => insertProduit(data))//.then sert à attacher les functions 
-        
-        .catch((err) => console.log('Erreur :' + err));
+        .then(data => insertProduit(data))//.then sert à attacher les functions       
+       
 };
 
 

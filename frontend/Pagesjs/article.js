@@ -15,7 +15,7 @@ function Produit(iD) {
     fetch(URLAPI+iD)
     .then(response=>response.json())
     .then(data=>insertProduit(data))
-    .catch((err) => console.log('Erreur :' + err));
+    
 };
     
 
@@ -48,21 +48,21 @@ function insertProduit(data){
          +'</article>';
         
 
-         let listeColor=document.getElementById("select");
-            for(let i= 0;i < data.colors.length; i++){
+         let listeColor = document.getElementById("select");
+            for(let i = 0;i < data.colors.length; i++){
                 listeColor.innerHTML+='<option value="'+ data.colors[i]+ '">'                
                 + data.colors[i]
                 +'</option>';                
             }
 
             document.getElementById("ajouter").addEventListener("click",function(){
-                let panier= JSON.parse(localStorage.getItem("Panier"))
-                if(panier==null){ 
-                    panier=[];
+                let panier = JSON.parse(localStorage.getItem("Panier"))
+                if(panier == null){ 
+                    panier = [];
                     }
                 panier.push(idProduct);                
                 localStorage.setItem("Panier",JSON.stringify(panier));
-                if(window.confirm("Article bien ajouté au panier.Souhaitez vous consulter votre panier ?")){
+                if(window.confirm("Article bien ajouté au panier. Souhaitez vous consulter votre panier ?")){
                     window.location.href = "Panier.html";
                 } else {
                     window.location.href = "../index.html";
