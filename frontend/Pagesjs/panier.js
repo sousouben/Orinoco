@@ -1,6 +1,7 @@
+//variable pour le total prix panier
 let total = 0;
 
-//    Affichage des articles mis dans le localstorage panier 
+//    Affichage des articles mis dans le localstorage 
 function getProduitsPaniers() {
         if (affichageLocalStoragePanier == null || affichageLocalStoragePanier.length === 0) {// si le panier est vide 
         document.getElementById('loginForm').style.display = 'none';
@@ -14,11 +15,11 @@ function getProduitsPaniers() {
     }
 };
 
-
+//variable pour afficher le localstorage dans id panier
 let affichageLocalStoragePanier = localStorage.getItem("Panier");
 affichageLocalStoragePanier = JSON.parse(affichageLocalStoragePanier);
-/*console.log(affichageLocalStoragePanier);*/
 
+// récuparation de l'URL API
 let URLAPI = "http://localhost:3000/api/teddies/";
 
 function Produit(iD, i) {
@@ -28,11 +29,12 @@ function Produit(iD, i) {
         
 };
 
-
+//insertion de tous les aricles stoqués dans le localestorage
 function insertPanier(data, i) {
     let articlePanier = document.getElementById("Panier");
     console.log(data);
-    total += data.price;
+    total += data.price;//calcul du prix panier
+    // création de la strucure html 
     articlePanier.innerHTML += '<div class="container__cart__page">'
         + '<tr class="text-center">'
         + '<td class="img_produit align-middle">'
@@ -45,11 +47,13 @@ function insertPanier(data, i) {
         + '<p>' + data.price / 100 + '€</p>'
         + '</td>'
         + '<td class=" align-middle">'
+        //création bouton suppression
         + '<button id="supprimer' + i + '"><i class="fas fa-times fa-lg"></i></button>'
         + '</td>'
         + '</tr>'
         + '</div>'
         ;
+
     // ----------gestion des suppressions des produits
     for (let j = 0; j < affichageLocalStoragePanier.length; j++) {
         let btnSupprimer = document.getElementById('supprimer' + j);
@@ -58,18 +62,17 @@ function insertPanier(data, i) {
             alert("cet article va etre suprimé!");
         })        
     }
-    
-          
-   
+
     //----------prix total du panier
-    
+    let totalPanier = document.getElementById('prix_panier');
+        totalPanier.innerHTML = 'Prix total = '+ total / 100 + '€';
         //Stockage du prix dans le localStorage pour la page de confirmation
         localStorage.setItem("totalOrder", JSON.stringify(total));
-        let totalPanier = document.getElementById('prix_panier');
-        totalPanier.innerHTML = total / 100 + '€'
+        
         
 };
 
+ //fonction de suppression du panier suite de la boucle for
 function supprimerProduit(j) {
     console.log(affichageLocalStoragePanier);
     affichageLocalStoragePanier.splice(j, 1);//splice()retire un élément du panier
@@ -80,7 +83,6 @@ function supprimerProduit(j) {
 //---------------------------FORMULAIRE----------------
 
 //Récupération des inputs
-
 let nom = document.getElementById("name");
 let prenom = document.getElementById("firstname");
 let email = document.getElementById("email");
@@ -95,7 +97,7 @@ let valid5;
 
 // écouter les modidfications
 formulaire.addEventListener('click', function (e) {
-    e.preventDefault();
+    e.preventDefault();//si l'événement n'est pas traité explicitement, son action par défaut ne doit pas être prise en compte 
     if (valid1 && valid2 && valid3 && valid4 && valid5) {
         let contact = {
             firstName: nom.value,
@@ -109,8 +111,8 @@ formulaire.addEventListener('click', function (e) {
             contact, products
         }
         const option = {
-            method: "POST",
-            body: JSON.stringify(object),
+            method: "POST",//La méthode .post() permet d'envoyer des données
+            body: JSON.stringify(object),//La méthode JSON.stringify() convertit une valeur JavaScript en chaîne JSON
             headers: {
                 "Content-Type": "application/json"
             }
@@ -155,7 +157,6 @@ ville.addEventListener('change', function () {
 });
 
 //validation du nom
-
 const validName = function (inputUserLastName) {
     let msg;//message a afficher dans le small 
     let valid = false;
@@ -181,8 +182,8 @@ const validName = function (inputUserLastName) {
     //on test l'expression régulière
     if (valid) {
         small.innerHTML = 'Nom valide';
-        small.classList.remove('text-danger');
-        small.classList.add('text-success');
+        small.classList.remove('text-danger');// le texte devient rouge lorsqu'il est faux
+        small.classList.add('text-success');// le texte devient vert lorqu'il est bon
         return true;
     }
     else {

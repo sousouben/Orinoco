@@ -209,6 +209,11 @@ max: width 27rem;
     border-radius:15px 0px 0px 15px;
     color: var(--text-btn-color);
 }
+
+.bouton{
+  margin-bottom: 2rem;
+}
+
 /*******************ARTICLES FIN************/
 /*****************PANIER*********************/
 .table td{
@@ -234,6 +239,7 @@ max: width 27rem;
   margin-left: 2rem;
   margin-right: 2rem;
 }
+
 
 .color .fas{
   color: #A567BC;

@@ -38,7 +38,7 @@ function insertProduit(data){
          +'<div class="description">'
          +'<h4>Description</h4>'
          +'<p>'+ data.description+'</p>'
-         +'<div>'
+         +'<div class="bouton">'
          +'<select id="select"><option selected disabled value="">choose..</option></select>'
          + '<a href="#">'
          + '<button id="ajouter"> ajouter au panier </button>'
