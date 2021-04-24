@@ -1,6 +1,10 @@
 //variable pour le total prix panier
 let total = 0;
 
+//variable pour afficher le localstorage dans id panier
+let affichageLocalStoragePanier = localStorage.getItem("Panier");
+affichageLocalStoragePanier = JSON.parse(affichageLocalStoragePanier);
+
 //    Affichage des articles mis dans le localstorage 
 function getProduitsPaniers() {
         if (affichageLocalStoragePanier == null || affichageLocalStoragePanier.length === 0) {// si le panier est vide 
@@ -10,14 +14,9 @@ function getProduitsPaniers() {
     } else {
         for (let i = 0; i < affichageLocalStoragePanier.length; i++) {
             Produit(affichageLocalStoragePanier[i], i);
-            console.log('articles mis au panier');
-        }
+            }
     }
 };
-
-//variable pour afficher le localstorage dans id panier
-let affichageLocalStoragePanier = localStorage.getItem("Panier");
-affichageLocalStoragePanier = JSON.parse(affichageLocalStoragePanier);
 
 // récuparation de l'URL API
 let URLAPI = "http://localhost:3000/api/teddies/";
@@ -26,13 +25,15 @@ function Produit(iD, i) {
     fetch(URLAPI + iD)
         .then(response => response.json())
         .then(data => insertPanier(data, i))
+        .catch(error => {
+            console.log("Il y a une erreur :"+ error.stack);
+        })
         
 };
 
 //insertion de tous les aricles stoqués dans le localestorage
 function insertPanier(data, i) {
-    let articlePanier = document.getElementById("Panier");
-    console.log(data);
+    let articlePanier = document.getElementById("Panier");    
     total += data.price;//calcul du prix panier
     // création de la strucure html 
     articlePanier.innerHTML += '<div class="container__cart__page">'
@@ -67,14 +68,11 @@ function insertPanier(data, i) {
     let totalPanier = document.getElementById('prix_panier');
         totalPanier.innerHTML = 'Prix total = '+ total / 100 + '€';
         //Stockage du prix dans le localStorage pour la page de confirmation
-        localStorage.setItem("totalOrder", JSON.stringify(total));
-        
-        
+        localStorage.setItem("totalOrder", JSON.stringify(total));       
 };
 
  //fonction de suppression du panier suite de la boucle for
 function supprimerProduit(j) {
-    console.log(affichageLocalStoragePanier);
     affichageLocalStoragePanier.splice(j, 1);//splice()retire un élément du panier
     localStorage.setItem("Panier", JSON.stringify(affichageLocalStoragePanier));//setitem() les ajoute à l'emplacement de stockage
     document.location.reload(true);//La méthode Location.reload() recharge la ressource depuis l'URL actuelle.

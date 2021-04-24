@@ -1,10 +1,9 @@
 let idProduct;
 
-function getId(){ console.log('ok');
+function getId(){ 
     const querystring = window.location.search;
     const params = new URLSearchParams(querystring);
-    const iD = params.get("id");
-    console.log(iD);
+    const iD = params.get("id");    
     idProduct=iD;
     Produit(iD);
     }
@@ -15,9 +14,11 @@ function Produit(iD) {
     fetch(URLAPI+iD)
     .then(response=>response.json())
     .then(data=>insertProduit(data))
+    .catch(error => {        
+        console.log("Il y a une erreur :"+ error.stack);
+    })
     
 };
-    
 
 function insertProduit(data){
     let articleProduit= document.getElementById("article_ours");  
@@ -54,7 +55,7 @@ function insertProduit(data){
                 + data.colors[i]
                 +'</option>';                
             }
-
+            
             document.getElementById("ajouter").addEventListener("click",function(){
                 let panier = JSON.parse(localStorage.getItem("Panier"))
                 if(panier == null){ 
