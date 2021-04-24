@@ -56,12 +56,12 @@ function insertPanier(data, i) {
         ;
 
     // ----------gestion des suppressions des produits
-    for (let j = 0; j < affichageLocalStoragePanier.length; j++) {
+   for (let j = 0; j < affichageLocalStoragePanier.length; j++) {
         let btnSupprimer = document.getElementById('supprimer' + j);
         btnSupprimer.addEventListener("click", (event) => {
             supprimerProduit(j);
             alert("cet article va etre suprimé!");
-        })        
+        })      
     }
 
     //----------prix total du panier
@@ -93,7 +93,7 @@ let valid3;
 let valid4;
 let valid5;
 
-// écouter les modidfications
+//validation du formulaire et redirection vers la page de confirmation
 formulaire.addEventListener('click', function (e) {
     e.preventDefault();//si l'événement n'est pas traité explicitement, son action par défaut ne doit pas être prise en compte 
     if (valid1 && valid2 && valid3 && valid4 && valid5) {
@@ -105,16 +105,17 @@ formulaire.addEventListener('click', function (e) {
             email: email.value
         }
         let products = affichageLocalStoragePanier
+         // création d'un objet regroupant contact et produits
         let object = {
             contact, products
         }
+        // envoie des données au serveur
         const option = {
             method: "POST",//La méthode .post() permet d'envoyer des données
             body: JSON.stringify(object),//La méthode JSON.stringify() convertit une valeur JavaScript en chaîne JSON
             headers: {
                 "Content-Type": "application/json"
             }
-
         }
         console.log(object);
         console.log(option);
@@ -123,8 +124,7 @@ formulaire.addEventListener('click', function (e) {
             .then(response => {
                 localStorage.removeItem("Panier")//vider le panier
                 localStorage.setItem("numero de commande", response.orderId)//récupération du numéro de commande 
-                console.log(response.orderId);//numéro decommande
-                
+                console.log(response.orderId);//numéro de commande                
             })
         window.location.href = "confirmation.html";//ouverture de la page confirmation
         console.log('le formulaire est valide');
@@ -134,7 +134,8 @@ formulaire.addEventListener('click', function (e) {
     }
 });
 
-nom.addEventListener('change', function () {
+// écouter les modidfications
+nom.addEventListener('change', function () {//change veut dire qu'on va observer le changement pour chaque etape du formulaire
     valid1 = validName(this);
 });
 
