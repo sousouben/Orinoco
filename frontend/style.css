@@ -251,3 +251,13 @@ max: width 27rem;
 
 
 /*********PANIER FIN******************/
+/********confirmation***************/
+
+.container_confirm{
+  background-image: url('../frontend/image/nuage.jpg');
+}
+
+.gif{
+  width: 21rem;   
+  
+}
