@@ -12,7 +12,7 @@ function Produit() {
         })
 };
 
-function insertProduit(data) {   
+function insertProduit(data) {     
     let articleProduit = document.getElementById("listeProduit");//Lien avec la page index HTML
     for (let i = 0; i < data.length; i++) {
         articleProduit.innerHTML += '<article id="produit">'//création de la structure index HTML

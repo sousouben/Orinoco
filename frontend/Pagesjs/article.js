@@ -1,16 +1,16 @@
 let idProduct;
 
 function getId(){ 
-    const querystring = window.location.search;
-    const params = new URLSearchParams(querystring);
-    const iD = params.get("id");    
-    idProduct=iD;
+    const querystring = window.location.search;//Renvoie un objet Location contenant des informations concernant l'URL actuelle du document et fournit des méthodes pour modifier cette URL.search La partie de l'URL qui suit le symbole « ? », avec ce symbole inclus
+    const params = new URLSearchParams(querystring);// fournit des informations pour l'analyse et le formatage des chaînes de requête d'URL.
+    const iD = params.get("id"); // La syntaxe get permet de lier une propriété d'un objet à une fonction qui sera appelée lorsqu'on accédera à la propriété.  
+    idProduct=iD;//let idProduct devient iD
     Produit(iD);
     }
 
 let URLAPI = "http://localhost:3000/api/teddies/";
 
-function Produit(iD) {
+function Produit(iD) {//création d'une fonction pour avoir un identifiant pour chaque produit
     fetch(URLAPI+iD)
     .then(response=>response.json())
     .then(data=>insertProduit(data))
@@ -20,9 +20,9 @@ function Produit(iD) {
     
 };
 
-function insertProduit(data){
+function insertProduit(data){    
     let articleProduit= document.getElementById("article_ours");  
-    console.log(data);  
+    console.log(data);  //pour avoir un objet avec toutes les information sur le produit
         articleProduit.innerHTML += '<article id="page_produit">' 
         + '<section class="produit_page1">' 
         +'<div class="img_produit">'
@@ -49,7 +49,7 @@ function insertProduit(data){
          +'</article>';
         
 
-         let listeColor = document.getElementById("select");
+         let listeColor = document.getElementById("select");//création d'option de séléction des couleurs
             for(let i = 0;i < data.colors.length; i++){
                 listeColor.innerHTML+='<option value="'+ data.colors[i]+ '">'                
                 + data.colors[i]
@@ -57,12 +57,12 @@ function insertProduit(data){
             }
             
             document.getElementById("ajouter").addEventListener("click",function(){
-                let panier = JSON.parse(localStorage.getItem("Panier"))
+                let panier = JSON.parse(localStorage.getItem("Panier"))//La méthode JSON.parse() analyse une chaîne de caractères JSON et construit la valeur JavaScript ou l'objet décrit par cette chaîne.
                 if(panier == null){ 
                     panier = [];
                     }
-                panier.push(idProduct);                
-                localStorage.setItem("Panier",JSON.stringify(panier));
+                panier.push(idProduct); //ajout du produit dans le panier               
+                localStorage.setItem("Panier",JSON.stringify(panier));//La méthode JSON.stringify() convertit une valeur JavaScript en chaîne JSON.
                 if(window.confirm("Article bien ajouté au panier. Souhaitez vous consulter votre panier ?")){
                     window.location.href = "Panier.html";
                 } else {
