@@ -1,6 +1,6 @@
 let idProduct;
 
-function getId(){ 
+function getId(){ //création d'une fonction pour avoir un identifiant pour chaque produit
     const querystring = window.location.search;//Renvoie un objet Location contenant des informations concernant l'URL actuelle du document et fournit des méthodes pour modifier cette URL.search La partie de l'URL qui suit le symbole « ? », avec ce symbole inclus
     const params = new URLSearchParams(querystring);// fournit des informations pour l'analyse et le formatage des chaînes de requête d'URL.
     const iD = params.get("id"); // La syntaxe get permet de lier une propriété d'un objet à une fonction qui sera appelée lorsqu'on accédera à la propriété.  
@@ -10,7 +10,7 @@ function getId(){
 
 let URLAPI = "http://localhost:3000/api/teddies/";
 
-function Produit(iD) {//création d'une fonction pour avoir un identifiant pour chaque produit
+function Produit(iD) {//création d'une fonction pour récupérer les identifiants pour chaque produit
     fetch(URLAPI+iD)
     .then(response=>response.json())
     .then(data=>insertProduit(data))

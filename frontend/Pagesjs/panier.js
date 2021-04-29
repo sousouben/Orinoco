@@ -32,7 +32,7 @@ function Produit(iD, i) {
 };
 
 //insertion de tous les aricles stoqués dans le localestorage
-function insertPanier(data, i) {
+function insertPanier(data, i) {    
     let articlePanier = document.getElementById("Panier");    
     total += data.price;//calcul du prix panier
     // création de la strucure html 
@@ -72,7 +72,7 @@ function insertPanier(data, i) {
 };
 
  //fonction de suppression du panier suite de la boucle for
-function supprimerProduit(j) {
+function supprimerProduit(j) {    
     affichageLocalStoragePanier.splice(j, 1);//splice()retire un élément du panier
     localStorage.setItem("Panier", JSON.stringify(affichageLocalStoragePanier));//setitem() les ajoute à l'emplacement de stockage
     document.location.reload(true);//La méthode Location.reload() recharge la ressource depuis l'URL actuelle.
