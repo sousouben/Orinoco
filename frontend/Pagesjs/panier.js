@@ -2,7 +2,7 @@
 let total = 0;
 
 //variable pour afficher le localstorage dans id panier
-let affichageLocalStoragePanier = localStorage.getItem("Panier");
+let affichageLocalStoragePanier = localStorage.getItem("Panier"); //Récupérer le panier créé à la page précédente
 affichageLocalStoragePanier = JSON.parse(affichageLocalStoragePanier);
 
 //    Affichage des articles mis dans le localstorage 
@@ -27,8 +27,7 @@ function Produit(iD, i) {
         .then(data => insertPanier(data, i))
         .catch(error => {
             console.log("Il y a une erreur :"+ error.stack);
-        })
-        
+        })        
 };
 
 //insertion de tous les aricles stoqués dans le localestorage
@@ -56,9 +55,8 @@ function insertPanier(data, i) {
         ;
 
     // ----------gestion des suppressions des produits
-   for (let j = 0; j < affichageLocalStoragePanier.length; j++) {
-        let btnSupprimer = document.getElementById('supprimer' + j);
-        btnSupprimer.addEventListener("click", (event) => {
+   for (let j = 0; j < affichageLocalStoragePanier.length; j++) {       
+        let btnSupprimer = document.getElementById('supprimer' + j).addEventListener("click", (event) => {
             supprimerProduit(j);
             alert("cet article va etre suprimé!");
         })      
@@ -74,8 +72,8 @@ function insertPanier(data, i) {
  //fonction de suppression du panier suite de la boucle for
 function supprimerProduit(j) {    
     affichageLocalStoragePanier.splice(j, 1);//splice()retire un élément du panier
-    localStorage.setItem("Panier", JSON.stringify(affichageLocalStoragePanier));//setitem() les ajoute à l'emplacement de stockage
-    document.location.reload(true);//La méthode Location.reload() recharge la ressource depuis l'URL actuelle.
+    localStorage.setItem("Panier", JSON.stringify(affichageLocalStoragePanier)); //Mise à jour du panier 
+    document.location.reload(true); //Rechargement de la page
 }
 
 //---------------------------FORMULAIRE----------------
@@ -135,7 +133,7 @@ formulaire.addEventListener('click', function (e) {
 });
 
 // écouter les modidfications
-nom.addEventListener('change', function () {//change veut dire qu'on va observer le changement pour chaque etape du formulaire
+nom.addEventListener('change', function () {
     valid1 = validName(this);
 });
 

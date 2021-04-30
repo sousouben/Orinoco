@@ -16,8 +16,7 @@ function Produit(iD) {//création d'une fonction pour récupérer les identifian
     .then(data=>insertProduit(data))
     .catch(error => {        
         console.log("Il y a une erreur :"+ error.stack);
-    })
-    
+    })    
 };
 
 function insertProduit(data){    
@@ -67,8 +66,7 @@ function insertProduit(data){
                     window.location.href = "Panier.html";
                 } else {
                     window.location.href = "../index.html";
-                }
-                
+                }                
             });
 }
 

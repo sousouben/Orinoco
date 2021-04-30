@@ -1,60 +1,63 @@
 <!DOCTYPE html>
 <html lang="fr">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <meta name="description" content="Vente en ligne d'ours en peluche faits main de qualité Française"/>
-        <link rel="stylesheet" href="style.css">
-        <link rel="preconnect" href="https://fonts.gstatic.com">
-        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
-        <script src="https://kit.fontawesome.com/56ca006626.js" crossorigin="anonymous"></script>  
-        <title>Orinounours by Orinoco</title>
-    </head>
-    <body>
-        <div class="grid-container">
-            <header class="header">
-                <div class="logo">
-                    <a href="index.html" title="Accueil"><img src="logo/logo.jpg" alt="logo du site orinoco"></a>
-                </div>
-                <nav class="menu">
-                    <a href="index.html" title="Produits"><i class="fas fa-paw"></i></a>                   
-                    <a href="../frontend/pages/Panier.html" title="Panier"><i class="fas fa-shopping-cart"></i></a>
-                </nav>
-            </header>
 
-            <main>
-                <div id="banniere_image">
-                    <div class="banniere_description">
-                        <h1>Doudou, Nounours, Peluche, à vous de choisir...</h1>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="description" content="Vente en ligne d'ours en peluche faits main de qualité Française" />
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/56ca006626.js" crossorigin="anonymous"></script>
+    <title>Orinounours by Orinoco</title>
+</head>
+
+<body>
+    <!--Barre de navigation-->
+    <div class="grid-container">
+        <header class="header">
+            <div class="logo">
+                <a href="index.html" title="Accueil"><img src="logo/logo.jpg" alt="logo du site orinoco"></a>
+            </div>
+            <nav class="menu">
+                <a href="index.html" title="Produits"><i class="fas fa-paw"></i></a>
+                <a href="../frontend/pages/Panier.html" title="Panier"><i class="fas fa-shopping-cart"></i></a>
+            </nav>
+        </header>
+        <!--Affichage des produits-->
+        <main>
+            <div id="banniere_image">
+                <div class="banniere_description">
+                    <h1>Doudou, Nounours, Peluche, à vous de choisir...</h1>
+                </div>
+            </div>
+            <div id="listeProduit">
+            </div>
+        </main>
+        <!--Footer-->
+        <footer>
+            <div class="footer">
+                <div>
+                    <div class="logo_bis">
+                        <h5>ORINOCO</h5>
                     </div>
                 </div>
-                <div id="listeProduit">
-                </div>
-            </main>
+                <ul>
+                    <li>
+                        <p>Design by Souad MOUATAKIDE</p>
+                    </li>
+                    <li>
+                        <p>Projet 5 - OpenClassrooms</p>
+                    </li>
+                    <li>
+                        <p>Copyright © 2021 Oursons by ORINOCO</p>
+                    </li>
+                </ul>
+            </div>
+        </footer>
+    </div>
+    <script src="produit.js" defer></script>
+</body>
 
-            <footer>
-                <div class="footer">
-                    <div>
-                        <div class="logo_bis">
-                            <h5>ORINOCO</h5>
-                        </div>
-                    </div>
-                    <ul>
-                        <li>
-                            <p>Design by Souad MOUATAKIDE</p>
-                        </li>
-                        <li>
-                            <p>Projet 5 - OpenClassrooms</p>
-                        </li>
-                        <li>
-                            <p>Copyright © 2021 Oursons by ORINOCO</p>
-                        </li>
-                    </ul>
-                </div>
-            </footer>
-        </div>
-        <script src="produit.js" defer></script>
-        </body>
-        
-        </html>
+</html>
