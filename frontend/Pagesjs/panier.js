@@ -1,17 +1,17 @@
-//variable pour le total prix panier
-let total = 0;
+let total = 0;//variable pour le total prix panier
 
-//variable pour afficher le localstorage dans id panier
+let URLAPI = "http://localhost:3000/api/teddies/";
+
 let affichageLocalStoragePanier = localStorage.getItem("Panier"); //Récupérer le panier créé à la page précédente
 affichageLocalStoragePanier = JSON.parse(affichageLocalStoragePanier);
 
 //    Affichage des articles mis dans le localstorage 
-function getProduitsPaniers() {
-        if (affichageLocalStoragePanier == null || affichageLocalStoragePanier.length === 0) {// si le panier est vide 
+function getProduitsPaniers() {//affichage panier vide
+        if (affichageLocalStoragePanier == null || affichageLocalStoragePanier.length === 0) {
         document.getElementById('loginForm').style.display = 'none';
         document.getElementById('panier-vide').innerHTML= "<p class='color'>Votre panier Orinounours est vide <i class='fas fa-frown'></i></p>";
        
-    } else {
+    } else {// affichage panier plein
         for (let i = 0; i < affichageLocalStoragePanier.length; i++) {
             Produit(affichageLocalStoragePanier[i], i);
             }
@@ -19,8 +19,6 @@ function getProduitsPaniers() {
 };
 
 // récuparation de l'URL API
-let URLAPI = "http://localhost:3000/api/teddies/";
-
 function Produit(iD, i) {
     fetch(URLAPI + iD)
         .then(response => response.json())
@@ -76,7 +74,7 @@ function supprimerProduit(j) {
     document.location.reload(true); //Rechargement de la page
 }
 
-//---------------------------FORMULAIRE----------------
+//--------------------FORMULAIRE----------------
 
 //Récupération des inputs
 let nom = document.getElementById("name");
@@ -93,7 +91,7 @@ let valid5;
 
 //validation du formulaire et redirection vers la page de confirmation
 formulaire.addEventListener('click', function (e) {
-    e.preventDefault();//si l'événement n'est pas traité explicitement, son action par défaut ne doit pas être prise en compte 
+    e.preventDefault();
     if (valid1 && valid2 && valid3 && valid4 && valid5) {
         let contact = {
             firstName: nom.value,
@@ -109,8 +107,8 @@ formulaire.addEventListener('click', function (e) {
         }
         // envoie des données au serveur
         const option = {
-            method: "POST",//La méthode .post() permet d'envoyer des données
-            body: JSON.stringify(object),//La méthode JSON.stringify() convertit une valeur JavaScript en chaîne JSON
+            method: "POST",
+            body: JSON.stringify(object),
             headers: {
                 "Content-Type": "application/json"
             }
@@ -326,6 +324,6 @@ const validEmail = function (inputEmail) {
     }
 };
 
-/////////////////////// Appel de fonctions////////////////////////////////
+/////////////////////// Appel de fonctions///////////
 window.onload = getProduitsPaniers();
 
