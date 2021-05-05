@@ -1,79 +1,170 @@
-let total = 0;//variable pour le total prix panier
-
 let URLAPI = "http://localhost:3000/api/teddies/";
 
 let affichageLocalStoragePanier = localStorage.getItem("Panier"); //Récupérer le panier créé à la page précédente
 affichageLocalStoragePanier = JSON.parse(affichageLocalStoragePanier);
 
-//    Affichage des articles mis dans le localstorage 
-function getProduitsPaniers() {//affichage panier vide
-        if (affichageLocalStoragePanier == null || affichageLocalStoragePanier.length === 0) {
-        document.getElementById('loginForm').style.display = 'none';
+function generateCart(cart) {
+    let element = document.getElementById("Panier"); //appel affichage du panier
+	let totalPanier = 0;
+	//affichage panier et total
+	if(cart && cart.length > 0){
+	
+		for (let i = 0; i < cart.length; i++) {
+			element.innerHTML +='<div class="container__cart__page">'
+            +`<tr class="text-center">` 
+            +`<td class="img_produit align-middle"> <img src='${cart[i].imageUrl}' alt=''></td>`
+            +`<td class="nom_produit align-middle">${cart[i].name}</td>` 
+            +`<td class="prix-produit align-middle">${new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR' }).format(cart[i].price/100)}</td>` 
+            +`<td class=" align-middle"><button class="btn" id="btn-${i}"><i class="fas fa-times fa-lg"></i></button></td>` 
+            +`</tr>`
+            +`</div>`;
+
+			totalPanier += cart[i].price/100;				
+        }
+
+        totalPanier = new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR' }).format(totalPanier)
+		element.innerHTML += `<th>TOTAL TTC</th>` 
+        + `<th></th>` 
+        + `<th>${totalPanier}</th>`
+        + `<th></th>`;
+		//local storage pour l'affichage du total du panier sur la page de confirmation
+		localStorage.setItem("total", totalPanier);  
+		generateForm();
+	} 
+    else{//affichage panier vide
+        document.getElementById('formContact').style.display = 'none';
         document.getElementById('panier-vide').innerHTML= "<p class='color'>Votre panier Orinounours est vide <i class='fas fa-frown'></i></p>";
-       
-    } else {// affichage panier plein
-        for (let i = 0; i < affichageLocalStoragePanier.length; i++) {
-            Produit(affichageLocalStoragePanier[i], i);
-            }
-    }
-};
+    } 
+}
+window.onload = generateCart(affichageLocalStoragePanier);
 
-// récuparation de l'URL API
-function Produit(iD, i) {
-    fetch(URLAPI + iD)
-        .then(response => response.json())
-        .then(data => insertPanier(data, i))
-        .catch(error => {
-            console.log("Il y a une erreur :"+ error.stack);
-        })        
-};
-
-//insertion de tous les aricles stoqués dans le localestorage
-function insertPanier(data, i) {    
-    let articlePanier = document.getElementById("Panier");    
-    total += data.price;//calcul du prix panier
-    // création de la strucure html 
-    articlePanier.innerHTML += '<div class="container__cart__page">'
-        + '<tr class="text-center">'
-        + '<td class="img_produit align-middle">'
-        + '<img src="' + data.imageUrl + '" >'
-        + '</td>'
-        + '<td class="nom_produit align-middle">'
-        + '<h3>' + data.name + '</h3>'
-        + '</td>'
-        + '<td class="prix-produit align-middle">'
-        + '<p>' + data.price / 100 + '€</p>'
-        + '</td>'
-        + '<td class=" align-middle">'
-        //création bouton suppression
-        + '<button id="supprimer' + i + '"><i class="fas fa-times fa-lg"></i></button>'
-        + '</td>'
-        + '</tr>'
-        + '</div>'
-        ;
-
-    // ----------gestion des suppressions des produits
-   for (let j = 0; j < affichageLocalStoragePanier.length; j++) {       
-        let btnSupprimer = document.getElementById('supprimer' + j).addEventListener("click", (event) => {
-            supprimerProduit(j);
-            alert("cet article va etre suprimé!");
-        })      
-    }
-
-    //----------prix total du panier
-    let totalPanier = document.getElementById('prix_panier');
-        totalPanier.innerHTML = 'Prix total = '+ total / 100 + '€';
-        //Stockage du prix dans le localStorage pour la page de confirmation
-        localStorage.setItem("totalOrder", JSON.stringify(total));       
-};
-
- //fonction de suppression du panier suite de la boucle for
-function supprimerProduit(j) {    
-    affichageLocalStoragePanier.splice(j, 1);//splice()retire un élément du panier
-    localStorage.setItem("Panier", JSON.stringify(affichageLocalStoragePanier)); //Mise à jour du panier 
-    document.location.reload(true); //Rechargement de la page
+//Retirer un produit du panier
+function clickOnDelete(i) {
+	affichageLocalStoragePanier.splice(i,1)
+	localStorage.setItem("Panier", JSON.stringify(affichageLocalStoragePanier)) //Mise à jour du panier 
+	document.location.reload(true); //Rechargement de la page
 }
 
+window.addEventListener("load", function(event) {
+    for(let i=0; i<affichageLocalStoragePanier.length; i++){
+        document.getElementById("btn-" + i).addEventListener('click', ()=> {clickOnDelete(i)})        
+    }
+});
+
+//--------------------FORMULAIRE----------------
+//Critères de vérification des inputs dans le formulaire de contact: email conforme et caractères spéciaux non-autorisés
+const checkMail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+const checkCaracteresSpeciaux = /[§!@#$%^&*().?":{}|<>]/;
+function checktext(text,email){
+	if(email && !checkMail.test(text)){
+        alert("Votre adresse email est incorrecte")
+		return false
+    }else if(email && checkMail.test(text)){
+        return true
+    }
+	if (checkCaracteresSpeciaux.test(text) ) {
+		alert("Attention ne pas utiliser de caractères spéciaux!");
+		return false;
+	}
+}
+
+//Création du formulaire de contact 
+function generateForm(){
+	let form = document.getElementById("formContact");
+	form.innerHTML =
+		`<h2 class="row my-5">Formulaire de commande</h2>
+		<form id="formulaire">
+			<div class="row">
+				<div class="col">
+					<label for="prenom">Prenom</label>
+					<input id="prenom" type="text" class="form-control" placeholder="Prénom" required>
+				</div>
+				<div class="col">
+					<label for="nom">Nom</label>
+					<input id="nom" type="text" class="form-control" placeholder="Nom" required>
+				</div>
+			</div>
+			<div class="row my-4">
+				<div class="col">
+					<label for="adresse">Adresse</label>
+					<input id="adresse" type="text" class="form-control" placeholder="Adresse" required>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col">
+					<label for="codepostal">Code Postal</label>
+					<input id="codepostal" type="number" class="form-control" placeholder="Code Postal" required>
+				</div>
+				<div class="col">
+					<label for="ville">Ville</label>
+					<input id="ville" type="text" class="form-control" placeholder="Ville" required>
+				</div>
+			</div>
+			<div class="row my-4">
+				<div class="col">
+					<label for="email">Email</label>
+					<input id="email" type="email" class="form-control" placeholder="Adresse électronique" required>
+				</div>
+			</div>
+			<div class="row my-4">
+				<div class="col">
+					<button type="submit" class="btn btn-secondary btn-lg btn-block">Valider</button>
+				</div>
+			</div>
+		</form>`;
+}
+
+//Vérification des inputs du formulaire
+document.getElementById("formulaire").addEventListener("submit", (event) => {
+    event.preventDefault();
+	let ok = true;
+    if(checktext(nom.value, false)===false){ok = false}
+    if(checktext(prenom.value, false)===false){ok = false}
+    if(checktext(email.value, true)===false){ok = false}
+    if(checktext(ville.value, false)===false){ok = false}
+    if(checktext(adresse.value, false)===false){ok = false}
+
+    //bloquer la suite de l'éxécution du code si les vérifications ne donnent pas de résultats conformes
+    if(ok){
+        let contact = {
+            firstName: document.getElementById("prenom").value,
+            lastName: document.getElementById("nom").value,
+            address: document.getElementById("adresse").value,
+            city: document.getElementById("ville").value,
+            email: document.getElementById("email").value,
+        }
+        //envoi de l'object contact si les vérifications donnent des résultats conformes
+        sendOrder(contact);
+    }
+});
+
+function sendOrder(contact){
+    //parcourir le tableau panier et récupérer les attributs id pour en faire un tableau
+    const products = affichageLocalStoragePanier.map(item => item.id)
+    const send = {
+        contact, products
+    };
+    const options = {
+        method: 'POST',
+        body: JSON.stringify(send),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }
+    // envoi de la requête post en fetch asynchrone - paramètres URL (renvoi une promesse)
+    fetch(URLAPI + "order", options)
+        .then(response => response.json()) //récupère la promesse puis la réponse promise - conversion JSON
+        .then(response => {
+            localStorage.removeItem("Panier");
+            localStorage.setItem("numero de commande", response.orderId); 
+            window.location.replace("confirmation.html")
+        })
+        .catch(error => {
+            console.log("Il y a une erreur :" + error.stack);
+        })
+}
+
+/*
 //--------------------FORMULAIRE----------------
 
 //Récupération des inputs
@@ -322,8 +413,5 @@ const validEmail = function (inputEmail) {
         small.classList.add('text-danger');
         return false;
     }
-};
-
-/////////////////////// Appel de fonctions///////////
-window.onload = getProduitsPaniers();
+};*/
 
