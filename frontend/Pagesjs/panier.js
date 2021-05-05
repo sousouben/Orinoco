@@ -3,7 +3,7 @@ let URLAPI = "http://localhost:3000/api/teddies/";
 let affichageLocalStoragePanier = localStorage.getItem("Panier"); //Récupérer le panier créé à la page précédente
 affichageLocalStoragePanier = JSON.parse(affichageLocalStoragePanier);
 
-function generateCart(cart) {
+function insertPanier(cart) {
     let element = document.getElementById("Panier"); //appel affichage du panier
 	let totalPanier = 0;
 	//affichage panier et total
@@ -29,17 +29,17 @@ function generateCart(cart) {
         + `<th></th>`;
 		//local storage pour l'affichage du total du panier sur la page de confirmation
 		localStorage.setItem("total", totalPanier);  
-		generateForm();
+		insertForm();
 	} 
     else{//affichage panier vide
         document.getElementById('formContact').style.display = 'none';
         document.getElementById('panier-vide').innerHTML= "<p class='color'>Votre panier Orinounours est vide <i class='fas fa-frown'></i></p>";
     } 
 }
-window.onload = generateCart(affichageLocalStoragePanier);
+window.onload = insertPanier(affichageLocalStoragePanier);
 
 //Retirer un produit du panier
-function clickOnDelete(i) {
+function supprimerClick(i) {
 	affichageLocalStoragePanier.splice(i,1)
 	localStorage.setItem("Panier", JSON.stringify(affichageLocalStoragePanier)) //Mise à jour du panier 
 	document.location.reload(true); //Rechargement de la page
@@ -47,30 +47,32 @@ function clickOnDelete(i) {
 
 window.addEventListener("load", function(event) {
     for(let i=0; i<affichageLocalStoragePanier.length; i++){        
-        document.getElementById("btn-" + i).addEventListener('click', ()=> {clickOnDelete(i);alert('Votre article va être supprimé...')});
+        document.getElementById("btn-" + i).addEventListener('click', ()=> {
+            supprimerClick(i);
+            alert('Votre article va être supprimé...')});
         
     }
 });
 
 //--------------------FORMULAIRE----------------
 //Critères de vérification des inputs dans le formulaire de contact: email conforme et caractères spéciaux non-autorisés
-const checkMail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-const checkCaracteresSpeciaux = /[§!@#$%^&*().?":{}|<>]/;
-function checktext(text,email){
-	if(email && !checkMail.test(text)){
+const regexMail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+const regexCaracteresSpeciaux = /[§!@#$%^&*().?":{}|<>]/;
+function regexText(text,email){
+	if(email && !regexMail.test(text)){
         alert("Votre adresse email est incorrecte")
 		return false
-    }else if(email && checkMail.test(text)){
+    }else if(email && regexMail.test(text)){
         return true
     }
-	if (checkCaracteresSpeciaux.test(text) ) {
+	if (regexCaracteresSpeciaux.test(text) ) {
 		alert("Attention ne pas utiliser de caractères spéciaux!");
 		return false;
 	}
 }
 
 //Création du formulaire de contact 
-function generateForm(){
+function insertForm(){
 	let form = document.getElementById("formContact");
 	form.innerHTML =
 		`<h2 class="row my-5 justify-content-center font-weight-bold">Formulaire de commande</h2>
@@ -104,7 +106,7 @@ function generateForm(){
 			<div class="row my-4">
 				<div class="col">
 					<label for="email">Email</label>
-					<input id="email" type="email" class="form-control" placeholder="Adresse électronique" required>
+					<input id="email" type="email" class="form-control" placeholder="adressemail@valide.com" required>
 				</div>
 			</div>
 			<div class="row my-4">
@@ -119,11 +121,11 @@ function generateForm(){
 document.getElementById("formulaire").addEventListener("submit", (event) => {
     event.preventDefault();
 	let ok = true;
-    if(checktext(nom.value, false)===false){ok = false}
-    if(checktext(prenom.value, false)===false){ok = false}
-    if(checktext(email.value, true)===false){ok = false}
-    if(checktext(ville.value, false)===false){ok = false}
-    if(checktext(adresse.value, false)===false){ok = false}
+    if(regexText(nom.value, false)===false){ok = false}
+    if(regexText(prenom.value, false)===false){ok = false}
+    if(regexText(email.value, true)===false){ok = false}
+    if(regexText(ville.value, false)===false){ok = false}
+    if(regexText(adresse.value, false)===false){ok = false}
 
     //bloquer la suite de l'éxécution du code si les vérifications ne donnent pas de résultats conformes
     if(ok){
@@ -135,11 +137,11 @@ document.getElementById("formulaire").addEventListener("submit", (event) => {
             email: document.getElementById("email").value,
         }
         //envoi de l'object contact si les vérifications donnent des résultats conformes
-        sendOrder(contact);
+        insertOrder(contact);
     }
 });
 
-function sendOrder(contact){
+function insertOrder(contact){
     //parcourir le tableau panier et récupérer les attributs id pour en faire un tableau
     const products = affichageLocalStoragePanier.map(item => item.id)
     const send = {
