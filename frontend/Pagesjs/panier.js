@@ -45,8 +45,8 @@ function supprimerClick(i) {
 	document.location.reload(true); //Rechargement de la page
 }
 
-window.addEventListener("load", function(event) {
-    for(let i=0; i<affichageLocalStoragePanier.length; i++){        
+window.addEventListener("load", function(event){
+    for(let i = 0; i < affichageLocalStoragePanier.length; i++){        
         document.getElementById("btn-" + i).addEventListener('click', ()=> {
             supprimerClick(i);
             alert('Votre article va être supprimé...')});
