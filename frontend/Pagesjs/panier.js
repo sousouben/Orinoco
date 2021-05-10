@@ -1,6 +1,6 @@
 let URLAPI = "http://localhost:3000/api/teddies/";
 
-let affichageLocalStoragePanier = localStorage.getItem("Panier"); //Récupérer le panier créé à la page précédente
+let affichageLocalStoragePanier = localStorage.getItem("Panier",[]); //Récupérer le panier créé à la page précédente
 affichageLocalStoragePanier = JSON.parse(affichageLocalStoragePanier);
 
 function insertPanier(cart) {
@@ -10,14 +10,25 @@ function insertPanier(cart) {
 	if(cart && cart.length > 0){
 	
 		for (let i = 0; i < cart.length; i++) {
-			element.innerHTML +='<div class="container__cart__page">'
-            +`<tr class="text-center">` 
-            +`<td class="img_produit align-middle"> <img src='${cart[i].imageUrl}' alt=''></td>`
-            +`<td class="nom_produit align-middle">${cart[i].name}</td>` 
-            +`<td class="prix-produit align-middle">${new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR' }).format(cart[i].price/100)}</td>` 
-            +`<td class=" align-middle"><button class="btn" id="btn-${i}"><i class="fas fa-times fa-lg"></i></button></td>` 
-            +`</tr>`
-            +`</div>`;
+			element.innerHTML +=
+            `<div class="container__cart__page">
+                <tr class="text-center">
+                    <td class="img_produit align-middle">
+                        <img src=${cart[i].imageUrl} alt=''>
+                    </td>
+                    <td class="nom_produit align-middle">
+                        ${cart[i].name}
+                    </td>
+                    <td class="prix-produit align-middle">
+                        ${new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR' }).format(cart[i].price/100)}
+                    </td>
+                    <td class=" align-middle">
+                        <button class="btn" id="btn-${i}">
+                            <i class="fas fa-times fa-lg"></i>
+                        </button>
+                    </td>
+                </tr>
+            </div>`;
 
 			totalPanier += cart[i].price/100;				
         }
@@ -38,7 +49,7 @@ function insertPanier(cart) {
 }
 window.onload = insertPanier(affichageLocalStoragePanier);
 
-//Retirer un produit du panier
+//Supprimer un produit du panier
 function supprimerClick(i) {
 	affichageLocalStoragePanier.splice(i,1)
 	localStorage.setItem("Panier", JSON.stringify(affichageLocalStoragePanier)) //Mise à jour du panier 
@@ -76,49 +87,51 @@ function insertForm(){
 	let form = document.getElementById("formContact");
 	form.innerHTML =
 		`<h2 class="row my-5 justify-content-center font-weight-bold">Formulaire de commande</h2>
-		<form id="formulaire">
-			<div class="row">
-				<div class="col">
-					<label for="prenom">Prenom</label>
-					<input id="prenom" type="text" class="form-control" placeholder="Prénom" required>
-				</div>
-				<div class="col">
-					<label for="nom">Nom</label>
-					<input id="nom" type="text" class="form-control" placeholder="Nom" required>
-				</div>
-			</div>
-			<div class="row my-4">
-				<div class="col">
-					<label for="adresse">Adresse</label>
-					<input id="adresse" type="text" class="form-control" placeholder="Adresse" required>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col">
-					<label for="codepostal">Code Postal</label>
-					<input id="codepostal" type="number" class="form-control" placeholder="Code Postal" required>
-				</div>
-				<div class="col">
-					<label for="ville">Ville</label>
-					<input id="ville" type="text" class="form-control" placeholder="Ville" required>
-				</div>
-			</div>
-			<div class="row my-4">
-				<div class="col">
-					<label for="email">Email</label>
-					<input id="email" type="email" class="form-control" placeholder="adressemail@valide.com" required>
-				</div>
-			</div>
-			<div class="row my-4">
-				<div class="col">
-					<button type="submit" class="btn btn-secondary btn-lg btn-block">Valider</button>
-				</div>
-			</div>
-		</form>`;
+		    <form id="formulaire">
+			    <div class="row">
+				    <div class="col">
+					    <label for="prenom">Prenom</label>
+					    <input id="prenom" type="text" class="form-control" placeholder="Prénom" required>
+				    </div>
+				    <div class="col">
+					    <label for="nom">Nom</label>
+					    <input id="nom" type="text" class="form-control" placeholder="Nom" required>
+				    </div>
+			    </div>
+			    <div class="row my-4">
+				    <div class="col">
+					    <label for="adresse">Adresse</label>
+					    <input id="adresse" type="text" class="form-control" placeholder="Adresse" required>
+				    </div>
+			    </div>
+			    <div class="row">
+				    <div class="col">
+					    <label for="codepostal">Code Postal</label>
+					    <input id="codepostal" type="number" class="form-control" placeholder="Code Postal" required>
+				    </div>
+				    <div class="col">
+					    <label for="ville">Ville</label>
+					    <input id="ville" type="text" class="form-control" placeholder="Ville" required>
+				    </div>
+			    </div>
+			    <div class="row my-4">
+				    <div class="col">
+					    <label for="email">Email</label>
+					    <input id="email" type="email" class="form-control" placeholder="adressemail@valide.com" required>
+				    </div>
+			    </div>
+			    <div class="row my-4">
+				    <div class="col">
+					    <button type="submit" class="btn btn-secondary btn-lg btn-block">Valider</button>
+				    </div>
+			    </div>
+		    </form>`;
 }
 
 //Vérification des inputs du formulaire
-document.getElementById("formulaire").addEventListener("submit", (event) => {
+let formulaire = document.getElementById("formulaire");
+
+formulaire && formulaire.addEventListener("submit", (event) => {
     event.preventDefault();
 	let ok = true;
     if(regexText(nom.value, false)===false){ok = false}

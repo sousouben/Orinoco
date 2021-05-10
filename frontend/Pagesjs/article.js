@@ -24,37 +24,42 @@ function Produit(iD) {//création d'une fonction pour récupérer les identifian
 
 function insertProduit(response) {
     let articleProduit = document.getElementById("article_ours");
-    articleProduit.innerHTML += '<article id="page_produit">'
-        + '<section class="produit_page1">'
-        + '<div class="img_produit">'
-        + `<img src="${response.imageUrl}" >`
-        + '</div>'
-        + '<div class="info_produit">'
-        + '<div class="nom_produit">'
-        + `<h3>${response.name} </h3>`
-        + '</div>'
-        + '<hr></hr>'
-        + '<div class="prix-produit">'
-        + `<p>${response.price / 100} €</p>`
-        + '</div>'
-        + '<div class="description">'
-        + '<h4>Description</h4>'
-        + `<p>${response.description}</p>`
-        + '<div class="bouton">'
-        + '<select id="select"><option selected disabled value="">choose..</option></select>'
-        + '<a href="#">'
-        + '<button id="ajouter"> ajouter au panier </button>'
-        + '</a>'
-        + '</div>'
-        + '</section>'
-        + '</article>';
+    articleProduit.innerHTML +=
+     `<article id="page_produit">
+        <section class="produit_page1">
+            <div class="img_produit">
+                <img src="${response.imageUrl}" >
+            </div>  
+            <div class="info_produit">
+                <div class="nom_produit">
+                    <h3>${response.name} </h3>
+                </div>
+                <hr></hr>
+                <div class="prix-produit">
+                    <p>${response.price / 100} €</p>
+                </div>
+                <div class="description">
+                    <h4>Description</h4>
+                        <p>${response.description}</p>
+                </div>        
+                <div class="bouton">
+                    <select id="select">
+                        <option selected disabled value="">Choose..</option>
+                    </select>
+                    <a href="#">
+                        <button id="ajouter">ajouter au panier</button>
+                    </a>                
+                </div>
+            </div>
+        </section>
+    </article>`;
 
 
     let listeColor = document.getElementById("select");//création d'option de séléction des couleurs
     for (let i = 0; i < response.colors.length; i++) {
-        listeColor.innerHTML += '<option value="' + response.colors[i] + '">'
-            + response.colors[i]
-            + '</option>';
+        listeColor.innerHTML += `<option value="${response.colors[i]}">
+                                    ${response.colors[i]}
+                                </option>`;
     }
 
     document.getElementById("ajouter").addEventListener("click", function () {

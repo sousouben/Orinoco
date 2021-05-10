@@ -2,7 +2,7 @@
 
 window.onload = function () {
 
-    let element = document.getElementById("orderId");
+    let element = document.getElementById("confirm");
     let total = localStorage.getItem("total");
     let orderId = localStorage.getItem("numero de commande")
   
@@ -10,8 +10,19 @@ window.onload = function () {
 
   //Création éléments HTML & affichage de l'orderId et du total du panier
     element.innerHTML =
-    `<li class="list-group-item">Votre numéro de commande : ${orderId}</li>
-      <li class="list-group-item">Total de votre commande : ${total} euros</li><p>Merci d\'avoir choisi Orinounours pour vos achats</p><p> A bientôt chez Orinoco !</p>`;
+    `<div class="row justify-content-center">
+      <div class="col-12">
+        <div class="my-5 py-2 text-center font-weight-bold">
+            <p id="orderId">Votre numéro de commande : ${orderId}</p>
+            <p id="total-prix">Total de votre commande : ${total} euros</p>
+            <p>Merci d\'avoir choisi Orinounours pour vos achats</p>
+            <p> A bientôt chez Orinoco !</p>
+        </div>
+      </div>
+    </div>
+    <div class="row justify-content-center">
+      <img class="gif" src="../image/icegif-25.gif" alt="gif ours">
+    </div>`;
   
       localStorage.clear();
   

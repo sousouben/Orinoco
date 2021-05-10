@@ -114,6 +114,12 @@ img, svg{
 
 }
 
+#listeProduit h2{
+  font-weight: bold;
+  font-size: 1.6rem;
+  font-family:cursive;
+}
+
 #produit{
   flex: 0 1 30rem;
   margin: 1rem;
@@ -203,12 +209,13 @@ max: width 27rem;
   color: black;
 }
 
-.description select{
+.bouton select{
   padding: 9px 1px;
     background-color: white;
     border: 1px solid var(--text-btn-color);
     border-radius:15px 0px 0px 15px;
     color: var(--text-btn-color);
+    margin-right: -4px;
 }
 
 .bouton{
