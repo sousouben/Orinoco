@@ -60,18 +60,17 @@ function insertProduit(response) {
         listeColor.innerHTML += `<option value="${response.colors[i]}">
                                     ${response.colors[i]}
                                 </option>`;
-    }
 
     document.getElementById("ajouter").addEventListener("click", function () {
         let panier = JSON.parse(localStorage.getItem("Panier"))
         if (panier == null) {
             panier = [];
-        }
+        }        
         panier.push({
             id: idProduct._id,
             imageUrl: idProduct.imageUrl,
             name: idProduct.name,
-            price: idProduct.price
+            price: idProduct.price            
         }); 
         localStorage.setItem("Panier", JSON.stringify(panier));
         if (window.confirm("Article bien ajouté au panier. Souhaitez vous consulter votre panier ?")) {
