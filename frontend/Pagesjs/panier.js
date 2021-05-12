@@ -1,6 +1,6 @@
 let URLAPI = "http://localhost:3000/api/teddies/";
 
-let affichageLocalStoragePanier = localStorage.getItem("Panier",[]); //Récupérer le panier créé à la page précédente
+let affichageLocalStoragePanier = localStorage.getItem("Panier",[])|| 0; //Récupérer le panier créé à la page précédente
 affichageLocalStoragePanier = JSON.parse(affichageLocalStoragePanier);
 
 function insertPanier(cart) {
