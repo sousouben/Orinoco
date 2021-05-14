@@ -1,6 +1,6 @@
 // récupération du numéro de commande + message de commande
 
-window.onload = function () {
+function Confirmation() {
 
     let element = document.getElementById("confirm");
     let total = localStorage.getItem("total");
@@ -27,3 +27,4 @@ window.onload = function () {
       localStorage.clear();
   
   }
+  window.onload = Confirmation();
