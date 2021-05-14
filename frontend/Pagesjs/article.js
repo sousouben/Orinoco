@@ -60,8 +60,8 @@ function insertProduit(response) {
         listeColor.innerHTML += `<option value="${response.colors[i]}">
                                     ${response.colors[i]}
                                 </option>`;
-                            }
-                            
+    }
+
     document.getElementById("ajouter").addEventListener("click", function () {
         let panier = JSON.parse(localStorage.getItem("Panier"))
         if (panier == null) {

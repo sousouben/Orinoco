@@ -10,7 +10,7 @@ window.onload = function () {
 
             for (let i = 0; i < response.length; i++) {
                 element.innerHTML +=
-                `<article id="produit">
+                    `<article id="produit">
                     <a href="pages/article.html?id=${response[i]._id}">
                     <div class="main_produit">
                         <div class="image">
@@ -32,14 +32,14 @@ window.onload = function () {
                     </div>
                     </a>
                 </article>`;
-                    
+
             }
         })
         .catch((error) => {
             let element = document.getElementById("listeProduit");
-            element.innerHTML += `<h2>Vous n'etes pas connecté au serveur.</br> Connexion impossible!!</h2>`                                    
+            element.innerHTML += `<h2>Vous n'etes pas connecté au serveur.</br> Connexion impossible!!</h2>`
             //Récupération des messages d'erreurs en cas de problèmes(s) avec la ligne grace à .stack
-            console.log("Il y a une erreur :"+ error.stack);            
+            console.log("Il y a une erreur :" + error.stack);
         });
 }
 
