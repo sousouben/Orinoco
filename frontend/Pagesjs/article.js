@@ -2,10 +2,10 @@ let URLAPI = "http://localhost:3000/api/teddies/";
 
 let idProduct;
 
-function getId() { 
+function getId() {
     const querystring = window.location.search;
     const params = new URLSearchParams(querystring);
-    const iD = params.get("id"); 
+    const iD = params.get("id");
     idProduct = iD;
     Produit(iD);
 }
@@ -25,7 +25,7 @@ function Produit(iD) {//création d'une fonction pour récupérer les identifian
 function insertProduit(response) {
     let articleProduit = document.getElementById("article_ours");
     articleProduit.innerHTML +=
-     `<article id="page_produit">
+        `<article id="page_produit">
         <section class="produit_page1">
             <div class="img_produit">
                 <img src="${response.imageUrl}" >
@@ -61,18 +61,18 @@ function insertProduit(response) {
                                     ${response.colors[i]}
                                 </option>`;
                             }
-
+                            
     document.getElementById("ajouter").addEventListener("click", function () {
         let panier = JSON.parse(localStorage.getItem("Panier"))
         if (panier == null) {
             panier = [];
-        }        
+        }
         panier.push({
             id: idProduct._id,
             imageUrl: idProduct.imageUrl,
             name: idProduct.name,
-            price: idProduct.price            
-        }); 
+            price: idProduct.price
+        });
         localStorage.setItem("Panier", JSON.stringify(panier));
         if (window.confirm("Article bien ajouté au panier. Souhaitez vous consulter votre panier ?")) {
             window.location.href = "Panier.html";
@@ -81,6 +81,5 @@ function insertProduit(response) {
         }
     });
 }
-
 // Appel de fonctions
 window.onload = getId();
